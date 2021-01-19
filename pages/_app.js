@@ -1,7 +1,20 @@
+import AppState from '../context/app/appState'
+import AuthState from '../context/auth/AuthState'
+import Head from 'next/head'
 import '../styles/globals.css'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+const MyApp = ({ Component, pageProps }) => {
+  return (
+    <AuthState>
+      <AppState>
+        <Head>
+          <title>Twitter</title>
+          <link rel="icon" href="/resouerces/favicon.ico" />
+        </Head>
+        <Component {...pageProps} />
+      </AppState>
+    </AuthState>
+  )
 }
 
 export default MyApp

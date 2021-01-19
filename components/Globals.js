@@ -1,0 +1,88 @@
+import styled from '@emotion/styled'
+
+export const ExternalContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+`
+
+export const Mobile = styled.div`
+  width: 100%;
+  height: 100vh;
+  max-width: 414px;
+  max-height: 851px;
+  position: relative;
+  background-color: #15202b;
+  color: #fff;
+`
+
+export const Container = styled.div`
+  margin: 50px 0 600px 0;
+`
+
+export const Title = styled.h1`
+  text-align: center;
+  font-size: 23px;
+  margin: 28px 0 9px 0;
+`
+
+export const FormContainer = styled.div``
+
+export const Form = styled.form`
+  display: flex;
+  flex-wrap: wrap;
+`
+
+export const InputHelper = styled.div`
+  span {
+    padding: 5px 5px 0 5px;
+    color: #8899a6;
+    font-size: 13px;
+    margin: 0;
+  }
+`
+
+export const InputContainer = styled.div`
+  padding: 10px 15px;
+  width: 100%;
+`
+
+export const Border = styled.div`
+  border: 1px solid #3d5466;
+  border-radius: 4px;
+  min-height: 59px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+`
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 2px 5px 5px 5px;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+`
+
+export const Button = styled.button`
+  width: 95%;
+  margin: 10px;
+  border-radius: 50px;
+  outline: none;
+  border: none;
+  padding: 1rem 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  background-color: #1da0f2;
+
+  &:disabled {
+    opacity: 0.5;
+    background-color: #1da1f2;
+  }
+`
