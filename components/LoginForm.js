@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import {
   FormContainer,
   Form,
@@ -15,9 +15,13 @@ import {
 import styles from './form.module.css'
 import authContext from '../context/auth/authContext'
 import FormHelper from './FormHelper'
+import { loginWithGoogle, loginWithGithub } from '../firebase/client'
+import { useRouter } from 'next/router'
 
 const LoginForm = () => {
-  const {} = useContext(authContext)
+  const router = useRouter()
+
+  const { user, setUser } = useContext(authContext)
   const [focus, setFocus] = useState({
     username: false,
     password: false,
@@ -27,6 +31,10 @@ const LoginForm = () => {
     username: '',
     password: '',
   })
+
+  useEffect(() => {
+    user && router.push('/home')
+  }, [])
 
   const handleClick = e => {
     e.preventDefault()
@@ -52,6 +60,16 @@ const LoginForm = () => {
       ...data,
       [e.target.name]: e.target.value,
     })
+  }
+
+  const handleLoginGoogle = async () => {
+    try {
+      const user = await loginWithGoogle()
+      setUser(user)
+      router.push('/home')
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -98,7 +116,7 @@ const LoginForm = () => {
       </Form>
       <FormHelper helper="Sign up for Twitter" redirect="/signup/flow" />
       <ExternalLogin>
-        <LoginGoogle>
+        <LoginGoogle onClick={handleLoginGoogle}>
           <img src="/resources/google.png" alt="" /> <span>Login with Google</span>
         </LoginGoogle>
         <LoginGithub>

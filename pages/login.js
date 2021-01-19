@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { ExternalContainer, Mobile, Title } from '../components/Globals'
 import LoginForm from '../components/LoginForm'
+import authContext from '../context/auth/authContext'
+import { onAuthStateChanged } from '../firebase/client'
+import { useRouter } from 'next/router'
 
 const Container = styled.div`
   width: 100%;
@@ -28,6 +31,15 @@ const LogoContainer = styled.div`
 `
 
 const Login = () => {
+  const { user, setUser } = useContext(authContext)
+
+  const router = useRouter()
+
+  useEffect(() => {
+    onAuthStateChanged(user => setUser(user))
+    user && router.push('/home')
+  }, [])
+
   return (
     <ExternalContainer>
       <Mobile>

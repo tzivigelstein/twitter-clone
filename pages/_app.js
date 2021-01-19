@@ -1,5 +1,5 @@
 import AppState from '../context/app/appState'
-import AuthState from '../context/auth/AuthState'
+import AuthState from '../context/auth/authState'
 import Head from 'next/head'
 import '../styles/globals.css'
 

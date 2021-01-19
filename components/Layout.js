@@ -1,5 +1,3 @@
-import styled from '@emotion/styled'
-import React from 'react'
 import Header from './Header'
 import Nav from './Nav'
 import { ExternalContainer, Mobile } from './Globals'

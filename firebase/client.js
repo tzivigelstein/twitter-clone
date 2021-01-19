@@ -10,8 +10,22 @@ const firebaseConfig = {
   measurementId: 'G-G11TZ82KHV',
 }
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
+!firebase.apps.length && firebase.initializeApp(firebaseConfig)
+
+const mapUserFromFirebaseAuth = data => {
+  const { displayName, email, photoURL } = data
+  return {
+    displayName,
+    email,
+    photoURL,
+  }
+}
+
+export const onAuthStateChanged = onChange => {
+  return firebase.auth().onAuthStateChanged(user => {
+    const normalizedUser = mapUserFromFirebaseAuth(user)
+    onChange(normalizedUser)
+  })
 }
 
 export const loginWithGithub = async () => {
@@ -22,13 +36,7 @@ export const loginWithGithub = async () => {
 
 export const loginWithGoogle = async () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider()
-  const res = await firebase.auth().signInWithPopup(googleProvider)
+  const data = await firebase.auth().signInWithPopup(googleProvider)
 
-  const { additionalUserInfo } = res
-  const { username, profile } = additionalUserInfo
-  const { avatar_url } = profile
-  return {
-    avatar: avatar_url,
-    username,
-  }
+  return mapUserFromFirebaseAuth(data)
 }

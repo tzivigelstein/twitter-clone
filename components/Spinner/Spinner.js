@@ -1,6 +1,14 @@
 import React from 'react'
 import styled from '@emotion/styled'
 
+const SpinnerExternalContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 150px;
+`
+
 const SpinnerContainer = styled.div`
   width: 2rem;
   height: 2rem;
@@ -49,10 +57,12 @@ const Spinner2 = styled.div`
 
 const Spinner = () => {
   return (
-    <SpinnerContainer>
-      <Spinner1></Spinner1>
-      <Spinner2></Spinner2>
-    </SpinnerContainer>
+    <SpinnerExternalContainer>
+      <SpinnerContainer>
+        <Spinner1></Spinner1>
+        <Spinner2></Spinner2>
+      </SpinnerContainer>
+    </SpinnerExternalContainer>
   )
 }
 

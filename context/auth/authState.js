@@ -3,6 +3,7 @@ import authReducer from './authReducer'
 import authContext from './authContext'
 import axiosClient from '../../config/axiosClient'
 import authToken from '../../config/authToken'
+import { SET_USER, SET_USER_ERROR } from '../../types'
 
 const AppState = ({ children }) => {
   const initialState = {
@@ -14,6 +15,19 @@ const AppState = ({ children }) => {
   }
 
   const [state, dispatch] = useReducer(authReducer, initialState)
+
+  const setUser = user => {
+    try {
+      dispatch({
+        type: SET_USER,
+        payload: user,
+      })
+    } catch (error) {
+      dispatch({
+        type: SET_USER_ERROR,
+      })
+    }
+  }
 
   const authUser = async () => {
     const token = localStorage.getItem('token')
@@ -62,6 +76,7 @@ const AppState = ({ children }) => {
         token: state.token,
         msg: state.msg,
         loading: state.loading,
+        setUser,
         authUser,
         signIn,
         logIn,

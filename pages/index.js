@@ -1,8 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 import Spinner from '../components/Spinner/Spinner'
 import authContext from '../context/auth/authContext'
-import { useRouter } from 'next/router'
 import styled from '@emotion/styled'
+import { ExternalContainer, Mobile } from '../components/Globals'
+import { onAuthStateChanged } from '../firebase/client'
+import { useRouter } from 'next/router'
 
 const SplashContainer = styled.div`
   display: flex;
@@ -16,30 +18,33 @@ const SplashContainer = styled.div`
 `
 
 const Index = () => {
-  const { auth,token, loading, authUser } = useContext(authContext)
-  const router = useRouter()
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (token) {
-      authUser()
-    }
-    if (!auth && !loading) {
-      router.push('/login')
-    } else if (auth && !loading) {
-      router.push('/home')
-    }
-  }, [])
+  const { loading, user, setUser } = useContext(authContext)
 
+  const router = useRouter()
+
+  useEffect(() => {
+    onAuthStateChanged(user => setUser(user))
+    user ? router.push('/home') : router.push('/login')
+  }, [])
+  
   return (
     <>
       {loading ? (
-        <SplashContainer>
-          <Spinner />
-        </SplashContainer>
+        <ExternalContainer>
+          <Mobile>
+            <SplashContainer>
+              <Spinner />
+            </SplashContainer>
+          </Mobile>
+        </ExternalContainer>
       ) : (
-        <SplashContainer>
-          <img src="/resources/favicon.png" alt="" />
-        </SplashContainer>
+        <ExternalContainer>
+          <Mobile>
+            <SplashContainer>
+              <img src="/resources/favicon.png" alt="" />
+            </SplashContainer>
+          </Mobile>
+        </ExternalContainer>
       )}
     </>
   )

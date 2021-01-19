@@ -106,6 +106,7 @@ export const LoginGoogle = styled.button`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  cursor: pointer;
 
   img {
     width: 1.3rem;
@@ -125,6 +126,7 @@ export const LoginGithub = styled.button`
   justify-content: flex-start;
   align-items: center;
   border: 1px solid rgba(230, 230, 230, 0.3);
+  cursor: pointer;
 
   img {
     width: 1.3rem;
