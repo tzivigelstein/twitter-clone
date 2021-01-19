@@ -8,13 +8,17 @@ import appContext from '../context/app/appContext'
 import Spinner from '../components/Spinner/Spinner'
 import { onAuthStateChanged } from '../firebase/client'
 import authContext from '../context/auth/authContext'
+import { useRouter } from 'next/router'
 
 const Index = () => {
   const { tweets, getTweets, loading } = useContext(appContext)
   const { user, setUser } = useContext(authContext)
 
+  const router = useRouter()
+
   useEffect(() => {
     onAuthStateChanged(user => setUser(user))
+    !user && router.push('/login')
     getTweets()
   }, [])
   return (
