@@ -14,7 +14,7 @@ const HelperContainer = styled.div`
     color: #1da0f2;
     font-size: 15px;
     cursor: pointer;
-    &:not(:first-child):not(:last-child) {
+    &:not(:first-of-type):not(:last-child) {
       color: #8899a6;
       cursor: default;
     }

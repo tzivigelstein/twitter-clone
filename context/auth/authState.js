@@ -7,9 +7,7 @@ import { SET_USER, SET_USER_ERROR } from '../../types'
 
 const AppState = ({ children }) => {
   const initialState = {
-    auth: false,
-    user: null,
-    token: typeof window != 'undefined' ? localStorage.getItem('token') : '',
+    user: undefined,
     msg: null,
     loading: false,
   }

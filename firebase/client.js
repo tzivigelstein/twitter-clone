@@ -38,5 +38,5 @@ export const loginWithGoogle = async () => {
   const googleProvider = new firebase.auth.GoogleAuthProvider()
   const data = await firebase.auth().signInWithPopup(googleProvider)
 
-  return mapUserFromFirebaseAuth(data)
+  return data
 }

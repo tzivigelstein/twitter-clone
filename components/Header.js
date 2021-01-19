@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { StarIcon } from './Icons'
 import authContext from '../context/auth/authContext'
+import { AvatarPlaceholder } from './Placeholders'
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ const Header = () => {
   const { user } = useContext(authContext)
   return (
     <HeaderContainer>
-      {user ? <UserIcon src={user.photoURL} /> : null}
+      {user ? <UserIcon src={user.photoURL} /> : <AvatarPlaceholder />}
       <div>
         <Title>Home</Title>
       </div>
