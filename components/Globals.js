@@ -86,3 +86,49 @@ export const Button = styled.button`
     background-color: #1da1f2;
   }
 `
+
+export const ExternalLogin = styled.div`
+  width: 70%;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+`
+
+export const LoginGoogle = styled.button`
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: #eee;
+  border-radius: 4px;
+  color: #222;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  img {
+    width: 1.3rem;
+    margin-right: 1.5rem;
+  }
+`
+export const LoginGithub = styled.button`
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: #222;
+  color: #eee;
+  border-radius: 4px;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid rgba(230, 230, 230, 0.3);
+
+  img {
+    width: 1.3rem;
+    filter: invert(100%);
+    margin-right: 1.5rem;
+  }
+`

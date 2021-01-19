@@ -1,5 +1,17 @@
 import React, { useState, useContext } from 'react'
-import { FormContainer, Form, InputContainer, Border, InputHelper, Input, Button } from './Globals'
+import {
+  FormContainer,
+  Form,
+  InputContainer,
+  Border,
+  InputHelper,
+  Input,
+  Button,
+  ExternalLogin,
+  LoginGoogle,
+  LoginGithub,
+  ExternalContainer,
+} from './Globals'
 import styles from './form.module.css'
 import authContext from '../context/auth/authContext'
 import FormHelper from './FormHelper'
@@ -85,6 +97,14 @@ const LoginForm = () => {
         </Button>
       </Form>
       <FormHelper helper="Sign up for Twitter" redirect="/signup/flow" />
+      <ExternalLogin>
+        <LoginGoogle>
+          <img src="/resources/google.png" alt="" /> <span>Login with Google</span>
+        </LoginGoogle>
+        <LoginGithub>
+          <img src="/resources/github.png" alt="" /> <span>Login with Github</span>
+        </LoginGithub>
+      </ExternalLogin>
     </FormContainer>
   )
 }

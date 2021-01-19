@@ -9,7 +9,7 @@ const MyApp = ({ Component, pageProps }) => {
       <AppState>
         <Head>
           <title>Twitter</title>
-          <link rel="icon" href="/resouerces/favicon.ico" />
+          <link rel="icon" href="/resources/favicon.png" />
         </Head>
         <Component {...pageProps} />
       </AppState>
