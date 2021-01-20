@@ -1,9 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { ArrowLeftIcon } from "components/Icons";
 import appContext from "context/app/appContext";
 import Spinner from "components/Spinner/Spinner";
+import { ExternalContainer, Mobile } from "components/Globals";
 
 const Header = styled.div`
   height: 50px;
@@ -91,31 +92,33 @@ const Index = () => {
   };
 
   return (
-    <>
-      <Header>
-        <Link href="/home">
-          <Back>
-            <ArrowLeftIcon />
-          </Back>
-        </Link>
-        <Tweet onClick={handleClick} disabled={area === null || area === ""}>
-          {loading ? <Spinner /> : <p>Tweet</p>}
-        </Tweet>
-      </Header>
-      <NewTweeetContainer>
-        <PictureContainer>
-          <Picture src="/resources/user.jpg" />
-        </PictureContainer>
-        <TextArea
-          onChange={handleChange}
-          value={tweetContent.area}
-          placeholder="What's happening?"
-          name="area"
-          cols="30"
-          rows="5"
-        ></TextArea>
-      </NewTweeetContainer>
-    </>
+    <ExternalContainer>
+      <Mobile>
+        <Header>
+          <Link href="/home">
+            <Back>
+              <ArrowLeftIcon />
+            </Back>
+          </Link>
+          <Tweet onClick={handleClick} disabled={area === null || area === ""}>
+            <p>Tweet</p>
+          </Tweet>
+        </Header>
+        <NewTweeetContainer>
+          <PictureContainer>
+            <Picture src="/resources/user.jpg" />
+          </PictureContainer>
+          <TextArea
+            onChange={handleChange}
+            value={tweetContent.area}
+            placeholder="What's happening?"
+            name="area"
+            cols="30"
+            rows="5"
+          ></TextArea>
+        </NewTweeetContainer>
+      </Mobile>
+    </ExternalContainer>
   );
 };
 
