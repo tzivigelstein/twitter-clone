@@ -1,4 +1,4 @@
-import styled from '@emotion/styled'
+import styled from "@emotion/styled";
 
 export const ExternalContainer = styled.div`
   display: flex;
@@ -6,7 +6,7 @@ export const ExternalContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-`
+`;
 
 export const Mobile = styled.div`
   width: 100%;
@@ -16,24 +16,24 @@ export const Mobile = styled.div`
   position: relative;
   background-color: #15202b;
   color: #fff;
-`
+`;
 
 export const Container = styled.div`
   margin: 50px 0 600px 0;
-`
+`;
 
 export const Title = styled.h1`
   text-align: center;
   font-size: 23px;
   margin: 28px 0 9px 0;
-`
+`;
 
-export const FormContainer = styled.div``
+export const FormContainer = styled.div``;
 
 export const Form = styled.form`
   display: flex;
   flex-wrap: wrap;
-`
+`;
 
 export const InputHelper = styled.div`
   span {
@@ -42,12 +42,12 @@ export const InputHelper = styled.div`
     font-size: 13px;
     margin: 0;
   }
-`
+`;
 
 export const InputContainer = styled.div`
   padding: 10px 15px;
   width: 100%;
-`
+`;
 
 export const Border = styled.div`
   border: 1px solid #3d5466;
@@ -56,7 +56,7 @@ export const Border = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-`
+`;
 
 export const Input = styled.input`
   width: 100%;
@@ -67,7 +67,7 @@ export const Input = styled.input`
   color: #fff;
   font-size: 18px;
   font-weight: 400;
-`
+`;
 
 export const Button = styled.button`
   width: 95%;
@@ -85,14 +85,14 @@ export const Button = styled.button`
     opacity: 0.5;
     background-color: #1da1f2;
   }
-`
+`;
 
 export const ExternalLogin = styled.div`
   width: 70%;
   margin: 2rem auto;
   display: flex;
   flex-direction: column;
-`
+`;
 
 export const LoginGoogle = styled.button`
   width: 100%;
@@ -112,7 +112,7 @@ export const LoginGoogle = styled.button`
     width: 1.3rem;
     margin-right: 1.5rem;
   }
-`
+`;
 export const LoginGithub = styled.button`
   width: 100%;
   outline: none;
@@ -133,4 +133,4 @@ export const LoginGithub = styled.button`
     filter: invert(100%);
     margin-right: 1.5rem;
   }
-`
+`;

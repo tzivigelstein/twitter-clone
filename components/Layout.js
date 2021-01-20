@@ -1,6 +1,6 @@
-import Header from './Header'
-import Nav from './Nav'
-import { ExternalContainer, Mobile } from './Globals'
+import Header from "./Header";
+import Nav from "./Nav";
+import { ExternalContainer, Mobile } from "./Globals";
 
 const Layout = ({ children }) => {
   return (
@@ -11,7 +11,7 @@ const Layout = ({ children }) => {
         <Nav />
       </Mobile>
     </ExternalContainer>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react'
-import styled from '@emotion/styled'
-import { StarIcon } from './Icons'
-import authContext from '../context/auth/authContext'
-import { AvatarPlaceholder } from './Placeholders'
+import React, { useContext, useEffect } from "react";
+import styled from "@emotion/styled";
+import { StarIcon } from "./Icons";
+import authContext from "../context/auth/authContext";
+import { AvatarPlaceholder } from "./Placeholders";
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -16,19 +16,19 @@ const HeaderContainer = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-`
+`;
 
 const UserIcon = styled.img`
   width: 28px;
   border-radius: 50%;
-`
+`;
 
 const Title = styled.span`
   font-size: 18px;
   font-weight: bold;
-`
+`;
 const Header = () => {
-  const { user } = useContext(authContext)
+  const { user } = useContext(authContext);
   return (
     <HeaderContainer>
       {user ? <UserIcon src={user.photoURL} /> : <AvatarPlaceholder />}
@@ -37,6 +37,6 @@ const Header = () => {
       </div>
       <StarIcon />
     </HeaderContainer>
-  )
-}
-export default Header
+  );
+};
+export default Header;

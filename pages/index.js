@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
-import Spinner from '../components/Spinner/Spinner'
-import authContext from '../context/auth/authContext'
-import styled from '@emotion/styled'
-import { ExternalContainer, Mobile } from '../components/Globals'
-import { onAuthStateChanged } from '../firebase/client'
-import { useRouter } from 'next/router'
+import React, { useContext, useEffect } from "react";
+import Spinner from "../components/Spinner/Spinner";
+import authContext from "../context/auth/authContext";
+import styled from "@emotion/styled";
+import { ExternalContainer, Mobile } from "../components/Globals";
+import { onAuthStateChanged } from "../firebase/client";
+import { useRouter } from "next/router";
 
 const SplashContainer = styled.div`
   display: flex;
@@ -15,18 +15,18 @@ const SplashContainer = styled.div`
   img {
     width: 6rem;
   }
-`
+`;
 
 const Index = () => {
-  const { loading, user, setUser } = useContext(authContext)
+  const { loading, user, setUser } = useContext(authContext);
 
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    onAuthStateChanged(user => setUser(user))
-    user ? router.push('/home') : router.push('/login')
-  }, [])
-  
+    onAuthStateChanged((user) => setUser(user));
+    user ? router.push("/home") : router.push("/login");
+  }, []);
+
   return (
     <>
       {loading ? (
@@ -47,7 +47,7 @@ const Index = () => {
         </ExternalContainer>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;

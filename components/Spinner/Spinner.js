@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from '@emotion/styled'
+import React from "react";
+import styled from "@emotion/styled";
 
 const SpinnerExternalContainer = styled.div`
   display: flex;
@@ -7,14 +7,14 @@ const SpinnerExternalContainer = styled.div`
   align-items: center;
   width: 100%;
   height: 150px;
-`
+`;
 
 const SpinnerContainer = styled.div`
   width: 2rem;
   height: 2rem;
   position: relative;
   margin: 2rem auto;
-`
+`;
 
 const Spinner1 = styled.div`
   width: 100%;
@@ -33,7 +33,7 @@ const Spinner1 = styled.div`
       transform: rotate(360deg);
     }
   }
-`
+`;
 
 const Spinner2 = styled.div`
   width: 100%;
@@ -53,7 +53,7 @@ const Spinner2 = styled.div`
       transform: rotate(-360deg);
     }
   }
-`
+`;
 
 const Spinner = () => {
   return (
@@ -63,7 +63,7 @@ const Spinner = () => {
         <Spinner2></Spinner2>
       </SpinnerContainer>
     </SpinnerExternalContainer>
-  )
-}
+  );
+};
 
-export default Spinner
+export default Spinner;

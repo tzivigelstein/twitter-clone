@@ -1,25 +1,25 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import Link from 'next/link'
+import React from "react";
+import styled from "@emotion/styled";
+import Link from "next/link";
 
 const ConnectionLost = () => {
   const Container = styled.div`
     margin: 0 1rem;
-  `
+  `;
 
   const CloudContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     padding-top: 1.5rem;
-  `
+  `;
 
   const Helper = styled.p`
     font-size: 14px;
     color: #8899a6;
     text-align: center;
     line-height: 1.3;
-  `
+  `;
 
   const Refresh = styled.div`
     border-radius: 60px;
@@ -31,14 +31,14 @@ const ConnectionLost = () => {
     display: flex;
     justify-content: center;
     align-items: center;
-  `
+  `;
 
   const RefreshText = styled.span`
     color: #fff;
     font-size: 14px;
     margin-left: 0.6rem;
     font-weight: bold;
-  `
+  `;
 
   return (
     <Container>
@@ -57,7 +57,9 @@ const ConnectionLost = () => {
           <line x1="1" y1="1" x2="23" y2="23"></line>
         </svg>
       </CloudContainer>
-      <Helper>Looks like you lost your connection. Please check it and try again.</Helper>
+      <Helper>
+        Looks like you lost your connection. Please check it and try again.
+      </Helper>
       <Link href="/">
         <Refresh href="/">
           <svg
@@ -78,7 +80,7 @@ const ConnectionLost = () => {
         </Refresh>
       </Link>
     </Container>
-  )
-}
+  );
+};
 
-export default ConnectionLost
+export default ConnectionLost;

@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import styled from '@emotion/styled'
-import SignupForm from '../../../components/SignupForm'
+import React, { useState } from "react";
+import styled from "@emotion/styled";
+import SignupForm from "../../../components/SignupForm";
 
 const Container = styled.div`
   margin: 0 30px;
-`
+`;
 
 const Header = styled.div`
   display: flex;
@@ -13,12 +13,12 @@ const Header = styled.div`
   padding: 0 1rem;
   justify-content: space-around;
   align-items: center;
-`
+`;
 
 const EmptySpace = styled.div`
   flex: 1;
   height: 20px;
-`
+`;
 
 const NextButtonContainer = styled.div`
   flex: 1;
@@ -26,7 +26,7 @@ const NextButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-`
+`;
 
 const NextButton = styled.button`
   background-color: #1da0f2;
@@ -45,24 +45,24 @@ const NextButton = styled.button`
     background-color: #1da1f2;
     opacity: 0.5;
   }
-`
+`;
 
 const TitleContainer = styled.div`
   margin: 15px 0;
-`
+`;
 
 const Title = styled.span`
   font-size: 23px;
   color: #fff;
   font-weight: bold;
   text-align: left;
-`
+`;
 
 const Index = () => {
-  const [disabled, setDisabled] = useState(true)
-  const isDisabled = state => {
-    setDisabled(state)
-  }
+  const [disabled, setDisabled] = useState(true);
+  const isDisabled = (state) => {
+    setDisabled(state);
+  };
   return (
     <>
       <Header>
@@ -85,7 +85,7 @@ const Index = () => {
         <SignupForm isDisabled={isDisabled} />
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;

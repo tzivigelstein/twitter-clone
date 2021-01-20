@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
-import styled from '@emotion/styled'
-import { ExternalContainer, Mobile, Title } from '../components/Globals'
-import LoginForm from '../components/LoginForm'
-import authContext from '../context/auth/authContext'
-import { onAuthStateChanged } from '../firebase/client'
-import { useRouter } from 'next/router'
+import React, { useContext, useEffect } from "react";
+import styled from "@emotion/styled";
+import { ExternalContainer, Mobile, Title } from "../components/Globals";
+import LoginForm from "../components/LoginForm";
+import authContext from "../context/auth/authContext";
+import { onAuthStateChanged } from "../firebase/client";
+import { useRouter } from "next/router";
 
 const Container = styled.div`
   width: 100%;
@@ -14,13 +14,13 @@ const Container = styled.div`
     max-width: 600px;
     margin: 0 auto;
   }
-`
+`;
 
 const Header = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-`
+`;
 
 const LogoContainer = styled.div`
   display: flex;
@@ -28,17 +28,17 @@ const LogoContainer = styled.div`
   aling-items: center;
   width: 100%;
   margin-top: 20px;
-`
+`;
 
 const Login = () => {
-  const { user, setUser } = useContext(authContext)
+  const { user, setUser } = useContext(authContext);
 
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    onAuthStateChanged(user => setUser(user))
-    user && router.push('/home')
-  }, [])
+    onAuthStateChanged((user) => setUser(user));
+    user && router.push("/home");
+  }, []);
 
   return (
     <ExternalContainer>
@@ -58,7 +58,7 @@ const Login = () => {
         </Container>
       </Mobile>
     </ExternalContainer>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

@@ -1,25 +1,26 @@
-import React, { useContext, useEffect } from 'react'
-import Layout from '../components/Layout'
-import Tweet from '../components/Tweet'
-import { Container } from '../components/Globals'
-import { NewIcon } from '../components/Icons'
-import ConnectionLost from '../components/ConnectionLost'
-import appContext from '../context/app/appContext'
-import Spinner from '../components/Spinner/Spinner'
-import { onAuthStateChanged } from '../firebase/client'
-import authContext from '../context/auth/authContext'
-import { useRouter } from 'next/router'
+import { useContext, useEffect } from "react";
+import Layout from "../components/Layout";
+import Tweet from "../components/Tweet";
+import { Container } from "../components/Globals";
+import { NewIcon } from "../components/Icons";
+import ConnectionLost from "../components/ConnectionLost";
+import appContext from "../context/app/appContext";
+import Spinner from "../components/Spinner/Spinner";
+import { onAuthStateChanged } from "../firebase/client";
+import authContext from "../context/auth/authContext";
+import { useRouter } from "next/router";
 
 const Index = () => {
-  const { tweets, getTweets, loading } = useContext(appContext)
-  const { user, setUser } = useContext(authContext)
+  const { tweets, getTweets, loading } = useContext(appContext);
+  const { user, setUser } = useContext(authContext);
 
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-  onAuthStateChanged(user => setUser(user))
-    getTweets()
-  }, [])
+    onAuthStateChanged((user) => setUser(user));
+    getTweets();
+  }, []);
+
   return (
     <>
       <Layout>
@@ -27,7 +28,7 @@ const Index = () => {
           <Container>
             {tweets ? (
               <>
-                {tweets.map(tweet => (
+                {tweets.map((tweet) => (
                   <Tweet
                     key={tweet.id}
                     user={tweet.user}
@@ -59,7 +60,7 @@ const Index = () => {
         <NewIcon />
       </Layout>
     </>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
