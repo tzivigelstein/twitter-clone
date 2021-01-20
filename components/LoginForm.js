@@ -10,12 +10,11 @@ import {
   ExternalLogin,
   LoginGoogle,
   LoginGithub,
-  ExternalContainer,
 } from "./Globals";
 import styles from "./form.module.css";
-import authContext from "../context/auth/authContext";
+import authContext from "context/auth/authContext";
 import FormHelper from "./FormHelper";
-import { loginWithGoogle, loginWithGithub } from "../firebase/client";
+import { loginWithGoogle, loginWithGithub } from "firebase/client";
 import { useRouter } from "next/router";
 
 const LoginForm = () => {

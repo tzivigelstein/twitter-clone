@@ -1,13 +1,13 @@
 import { useContext, useEffect } from "react";
-import Layout from "../components/Layout";
-import Tweet from "../components/Tweet";
-import { Container } from "../components/Globals";
-import { NewIcon } from "../components/Icons";
-import ConnectionLost from "../components/ConnectionLost";
-import appContext from "../context/app/appContext";
-import Spinner from "../components/Spinner/Spinner";
-import { onAuthStateChanged } from "../firebase/client";
-import authContext from "../context/auth/authContext";
+import Layout from "components/Layout";
+import Tweet from "components/Tweet";
+import { Container } from "components/Globals";
+import { NewIcon } from "components/Icons";
+import ConnectionLost from "components/ConnectionLost";
+import appContext from "context/app/appContext";
+import Spinner from "components/Spinner/Spinner";
+import { onAuthStateChanged } from "firebase/client";
+import authContext from "context/auth/authContext";
 import { useRouter } from "next/router";
 
 const Index = () => {

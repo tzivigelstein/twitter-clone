@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import styled from "@emotion/styled";
 import { StarIcon } from "./Icons";
-import authContext from "../context/auth/authContext";
+import authContext from "context/auth/authContext";
 import { AvatarPlaceholder } from "./Placeholders";
 
 const HeaderContainer = styled.div`

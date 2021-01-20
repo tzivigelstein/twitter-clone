@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { ArrowLeftIcon } from "../../../components/Icons";
-import appContext from "../../../context/app/appContext";
-import Spinner from "../../../components/Spinner/Spinner";
+import { ArrowLeftIcon } from "components/Icons";
+import appContext from "context/app/appContext";
+import Spinner from "components/Spinner/Spinner";
 
 const Header = styled.div`
   height: 50px;

@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import Spinner from "../components/Spinner/Spinner";
-import authContext from "../context/auth/authContext";
+import Spinner from "components/Spinner/Spinner";
+import authContext from "context/auth/authContext";
 import styled from "@emotion/styled";
-import { ExternalContainer, Mobile } from "../components/Globals";
-import { onAuthStateChanged } from "../firebase/client";
+import { ExternalContainer, Mobile } from "components/Globals";
+import { onAuthStateChanged } from "firebase/client";
 import { useRouter } from "next/router";
 
 const SplashContainer = styled.div`

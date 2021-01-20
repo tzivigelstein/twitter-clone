@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import {
   FormContainer,
   Form,
@@ -8,7 +8,6 @@ import {
   Input,
 } from "./Globals";
 import styles from "./form.module.css";
-import authContext from "../context/auth/authContext";
 import styled from "@emotion/styled";
 
 const NormalizedInputContainer = styled(InputContainer)`
