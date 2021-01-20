@@ -93,7 +93,7 @@ const Index = () => {
   return (
     <>
       <Header>
-        <Link href="/">
+        <Link href="/home">
           <Back>
             <ArrowLeftIcon />
           </Back>
