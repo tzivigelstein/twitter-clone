@@ -1,4 +1,4 @@
-import { SET_USER, SET_USER_ERROR } from "../../types";
+import { SET_USER, SET_USER_ERROR } from '../../types'
 
 export default (state, action) => {
   switch (action.type) {
@@ -6,8 +6,8 @@ export default (state, action) => {
       return {
         ...state,
         user: action.payload,
-      };
+      }
     default:
-      return state;
+      return state
   }
-};
+}

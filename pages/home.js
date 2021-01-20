@@ -1,66 +1,77 @@
-import { useContext, useEffect } from "react";
-import Layout from "components/Layout";
-import Tweet from "components/Tweet";
-import { Container } from "components/Globals";
-import { NewIcon } from "components/Icons";
-import ConnectionLost from "components/ConnectionLost";
-import appContext from "context/app/appContext";
-import Spinner from "components/Spinner/Spinner";
-import { onAuthStateChanged } from "firebase/client";
-import authContext from "context/auth/authContext";
-import { useRouter } from "next/router";
+import { useContext, useEffect } from 'react'
+import Layout from 'components/Layout'
+import Tweet from 'components/Tweet'
+import { Container } from 'components/Globals'
+import { NewIcon } from 'components/Icons'
+import ConnectionLost from 'components/ConnectionLost'
+import appContext from 'context/app/appContext'
+import Spinner from 'components/Spinner/Spinner'
+import { useRouter } from 'next/router'
+import useUser from 'hooks/useUser'
 
 const Index = () => {
-  const { tweets, getTweets, loading } = useContext(appContext);
-  const { user, setUser } = useContext(authContext);
+  const { tweets, getTweets, loading } = useContext(appContext)
 
-  const router = useRouter();
+  const router = useRouter()
+
+  const user = useUser()
 
   useEffect(() => {
-    onAuthStateChanged((user) => setUser(user));
-    getTweets();
-  }, []);
+    user === null && router.replace('/login')
+  }, [user])
+
+  useEffect(() => {
+    user && getTweets()
+  }, [user])
 
   return (
-    <>
-      <Layout>
-        <div>
-          <Container>
-            {tweets ? (
-              <>
-                {tweets.map((tweet) => (
-                  <Tweet
-                    key={tweet.id}
-                    user={tweet.user}
-                    username={tweet.username}
-                    picture={tweet.picture}
-                    content={tweet.content}
-                    comments={tweet.comments}
-                    likes={tweet.likes}
-                    retweets={tweet.retweets}
-                    date={tweet.date}
-                  />
-                ))}
-              </>
-            ) : (
-              <>
-                {loading ? (
-                  <Container>
-                    <Spinner />
-                  </Container>
-                ) : (
-                  <Container>
-                    <ConnectionLost />
-                  </Container>
-                )}
-              </>
-            )}
-          </Container>
-        </div>
-        <NewIcon />
-      </Layout>
-    </>
-  );
-};
+    <Layout>
+      {user ? (
+        <>
+          <div>
+            <Container>
+              {tweets ? (
+                <>
+                  {tweets.map(tweet => (
+                    <Tweet
+                      key={tweet.id}
+                      user={tweet.user}
+                      username={tweet.username}
+                      picture={tweet.picture}
+                      content={tweet.content}
+                      comments={tweet.comments}
+                      likes={tweet.likes}
+                      retweets={tweet.retweets}
+                      date={tweet.date}
+                    />
+                  ))}
+                </>
+              ) : (
+                <>
+                  {loading ? (
+                    <Container>
+                      <div
+                        style={{
+                          marginTop: '50%',
+                        }}
+                      >
+                        <Spinner width="2rem" />
+                      </div>
+                    </Container>
+                  ) : (
+                    <Container>
+                      <ConnectionLost />
+                    </Container>
+                  )}
+                </>
+              )}
+            </Container>
+          </div>
+          <NewIcon />
+        </>
+      ) : null}
+    </Layout>
+  )
+}
 
-export default Index;
+export default Index

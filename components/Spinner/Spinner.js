@@ -1,19 +1,4 @@
-import styled from "@emotion/styled";
-
-const SpinnerExternalContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 150px;
-`;
-
-const SpinnerContainer = styled.div`
-  width: 2rem;
-  height: 2rem;
-  position: relative;
-  margin: 2rem auto;
-`;
+import styled from '@emotion/styled'
 
 const Spinner1 = styled.div`
   width: 100%;
@@ -32,7 +17,7 @@ const Spinner1 = styled.div`
       transform: rotate(360deg);
     }
   }
-`;
+`
 
 const Spinner2 = styled.div`
   width: 100%;
@@ -52,17 +37,21 @@ const Spinner2 = styled.div`
       transform: rotate(-360deg);
     }
   }
-`;
+`
 
-const Spinner = () => {
+const Spinner = ({ width }) => {
+  const SpinnerContainer = styled.div`
+    width: ${width};
+    height: ${width};
+    position: relative;
+    margin: 0 auto;
+  `
   return (
-    <SpinnerExternalContainer>
-      <SpinnerContainer>
-        <Spinner1></Spinner1>
-        <Spinner2></Spinner2>
-      </SpinnerContainer>
-    </SpinnerExternalContainer>
-  );
-};
+    <SpinnerContainer>
+      <Spinner1></Spinner1>
+      <Spinner2></Spinner2>
+    </SpinnerContainer>
+  )
+}
 
-export default Spinner;
+export default Spinner

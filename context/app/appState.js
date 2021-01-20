@@ -1,8 +1,9 @@
-import { useReducer } from "react";
-import appReducer from "./appReducer";
-import appContext from "./appContext";
-import axiosClient from "../../config/axiosClient";
-import { useRouter } from "next/router";
+import { useReducer } from 'react'
+import appReducer from './appReducer'
+import appContext from './appContext'
+import axiosClient from '../../config/axiosClient'
+import { useRouter } from 'next/router'
+import firebase from 'firebase/client'
 import {
   GET_TWEETS_SUCCESS,
   GET_TWEETS_ERROR,
@@ -10,7 +11,7 @@ import {
   POST_TWEETS_ERROR,
   LOADING,
   CAPTURE_TWEET_CONTENT,
-} from "../../types";
+} from '../../types'
 
 const AppState = ({ children }) => {
   const initialState = {
@@ -18,57 +19,45 @@ const AppState = ({ children }) => {
     loading: false,
     msg: null,
     tweetContent: {
-      area: null,
+      area: '',
     },
-  };
-  const [state, dispatch] = useReducer(appReducer, initialState);
+  }
+  const [state, dispatch] = useReducer(appReducer, initialState)
 
-  const router = useRouter();
+  const router = useRouter()
 
   const getTweets = async () => {
     dispatch({
       type: LOADING,
-    });
+    })
     try {
-      const q = await axiosClient("/api/tweets");
+      const q = await axiosClient('/api/tweets')
       dispatch({
         type: GET_TWEETS_SUCCESS,
         payload: q.data.tweets,
-      });
-      console.log(q.data.tweets);
+      })
+      console.log(q.data.tweets)
     } catch (error) {
       dispatch({
         type: GET_TWEETS_ERROR,
-      });
-      console.log(error);
+      })
+      console.log(error)
     }
-  };
+  }
 
-  const captureTweetContent = (data) => {
+  const captureTweetContent = data => {
     dispatch({
       type: CAPTURE_TWEET_CONTENT,
       payload: data,
-    });
-  };
+    })
+  }
 
-  const postTweet = async (data) => {
+  const postTweet = async data => {
     dispatch({
       type: LOADING,
-    });
-    try {
-      const q = await axiosClient.post("/api/tweets", data);
-      dispatch({
-        type: POST_TWEETS_SUCCESS,
-        payload: q.data.todo,
-      });
-    } catch (error) {
-      dispatch({
-        type: POST_TWEETS_ERROR,
-      });
-      console.log(error);
-    }
-    router.push("/");
-  };
+    })
+    router.replace('/')
+  }
 
   return (
     <appContext.Provider
@@ -84,7 +73,7 @@ const AppState = ({ children }) => {
     >
       {children}
     </appContext.Provider>
-  );
-};
+  )
+}
 
-export default AppState;
+export default AppState

@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import Link from "next/link";
+import styled from '@emotion/styled'
+import Link from 'next/link'
 
 const HelperContainer = styled.div`
   display: flex;
@@ -18,7 +18,7 @@ const HelperContainer = styled.div`
       cursor: default;
     }
   }
-`;
+`
 
 const FormHelper = ({ helper, redirect }) => {
   return (
@@ -29,7 +29,7 @@ const FormHelper = ({ helper, redirect }) => {
         <span>{helper}</span>
       </Link>
     </HelperContainer>
-  );
-};
+  )
+}
 
-export default FormHelper;
+export default FormHelper

@@ -1,7 +1,7 @@
-import AppState from "../context/app/appState";
-import AuthState from "../context/auth/authState";
-import Head from "next/head";
-import "../styles/globals.css";
+import AppState from '../context/app/appState'
+import AuthState from '../context/auth/authState'
+import Head from 'next/head'
+import '../styles/globals.css'
 
 const MyApp = ({ Component, pageProps }) => {
   return (
@@ -14,7 +14,7 @@ const MyApp = ({ Component, pageProps }) => {
         <Component {...pageProps} />
       </AppState>
     </AuthState>
-  );
-};
+  )
+}
 
-export default MyApp;
+export default MyApp

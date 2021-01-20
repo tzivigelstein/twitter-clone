@@ -1,44 +1,45 @@
-import styled from "@emotion/styled";
-import Link from "next/link";
+import { useContext } from 'react'
+import styled from '@emotion/styled'
+import appContext from 'context/app/appContext'
 
+const Container = styled.div`
+  margin: 0 1rem;
+`
+
+const CloudContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 1.5rem;
+`
+
+const Helper = styled.p`
+  font-size: 14px;
+  color: #8899a6;
+  text-align: center;
+  line-height: 1.3;
+`
+
+const Refresh = styled.div`
+  border-radius: 60px;
+  background: #1da0f2;
+  width: 118px;
+  padding: 0.5rem 0;
+  margin: 0 auto;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
+const RefreshText = styled.span`
+  color: #fff;
+  font-size: 14px;
+  margin-left: 0.6rem;
+  font-weight: bold;
+`
 const ConnectionLost = () => {
-  const Container = styled.div`
-    margin: 0 1rem;
-  `;
-
-  const CloudContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1.5rem;
-  `;
-
-  const Helper = styled.p`
-    font-size: 14px;
-    color: #8899a6;
-    text-align: center;
-    line-height: 1.3;
-  `;
-
-  const Refresh = styled.div`
-    border-radius: 60px;
-    background: #1da0f2;
-    width: 118px;
-    padding: 0.5rem 0;
-    margin: 0 auto;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  `;
-
-  const RefreshText = styled.span`
-    color: #fff;
-    font-size: 14px;
-    margin-left: 0.6rem;
-    font-weight: bold;
-  `;
-
+  const { getTweets } = useContext(appContext)
   return (
     <Container>
       <CloudContainer>
@@ -56,30 +57,26 @@ const ConnectionLost = () => {
           <line x1="1" y1="1" x2="23" y2="23"></line>
         </svg>
       </CloudContainer>
-      <Helper>
-        Looks like you lost your connection. Please check it and try again.
-      </Helper>
-      <Link href="/">
-        <Refresh href="/">
-          <svg
-            viewBox="0 0 24 24"
-            width="21"
-            height="21"
-            stroke="#fff"
-            strokeWidth="2"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="23 4 23 10 17 10"></polyline>
-            <polyline points="1 20 1 14 7 14"></polyline>
-            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-          </svg>
-          <RefreshText>Try again</RefreshText>
-        </Refresh>
-      </Link>
+      <Helper>Looks like you lost your connection. Please check it and try again.</Helper>
+      <Refresh onClick={getTweets}>
+        <svg
+          viewBox="0 0 24 24"
+          width="21"
+          height="21"
+          stroke="#fff"
+          strokeWidth="2"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <polyline points="1 20 1 14 7 14"></polyline>
+          <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+        </svg>
+        <RefreshText>Try again</RefreshText>
+      </Refresh>
     </Container>
-  );
-};
+  )
+}
 
-export default ConnectionLost;
+export default ConnectionLost

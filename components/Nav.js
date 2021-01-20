@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { HomeIcon, SearchIcon, BellIcon, MailIcon } from "./Icons";
+import styled from '@emotion/styled'
+import { HomeIcon, SearchIcon, BellIcon, MailIcon } from './Icons'
 
 const NavContainer = styled.div`
   display: flex;
@@ -13,7 +13,7 @@ const NavContainer = styled.div`
   height: 53px;
   background-color: rgb(21, 32, 43);
   border-top: 1px solid rgb(56, 68, 77);
-`;
+`
 
 const IconContainer = styled.div`
   display: flex;
@@ -21,10 +21,10 @@ const IconContainer = styled.div`
   justify-content: center;
   width: 100%;
   height: 100%;
-`;
+`
 const Icon = styled.img`
   width: 12px;
-`;
+`
 
 const Nav = () => {
   return (
@@ -42,7 +42,7 @@ const Nav = () => {
         <MailIcon />
       </IconContainer>
     </NavContainer>
-  );
-};
+  )
+}
 
-export default Nav;
+export default Nav

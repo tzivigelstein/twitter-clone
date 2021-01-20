@@ -1,10 +1,11 @@
-import React, { useContext, useEffect } from "react";
-import Spinner from "components/Spinner/Spinner";
-import authContext from "context/auth/authContext";
-import styled from "@emotion/styled";
-import { ExternalContainer, Mobile } from "components/Globals";
-import { onAuthStateChanged } from "firebase/client";
-import { useRouter } from "next/router";
+import React, { useContext, useEffect } from 'react'
+import Spinner from 'components/Spinner/Spinner'
+import authContext from 'context/auth/authContext'
+import styled from '@emotion/styled'
+import { ExternalContainer, Mobile } from 'components/Globals'
+import { onAuthStateChanged } from 'firebase/client'
+import { useRouter } from 'next/router'
+import useUser from 'hooks/useUser'
 
 const SplashContainer = styled.div`
   display: flex;
@@ -15,17 +16,18 @@ const SplashContainer = styled.div`
   img {
     width: 6rem;
   }
-`;
+`
 
 const Index = () => {
-  const { loading, user, setUser } = useContext(authContext);
+  const { loading } = useContext(authContext)
 
-  const router = useRouter();
+  const router = useRouter()
+
+  const user = useUser()
 
   useEffect(() => {
-    onAuthStateChanged((user) => setUser(user));
-    user ? router.push("/home") : router.push("/login");
-  }, []);
+    user ? router.replace('/home') : router.replace('/login')
+  }, [])
 
   return (
     <>
@@ -47,7 +49,7 @@ const Index = () => {
         </ExternalContainer>
       )}
     </>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index
