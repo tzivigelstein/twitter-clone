@@ -135,7 +135,7 @@ const Index = () => {
                 <ArrowLeftIcon />
               </Back>
             </Link>
-            <Tweet onClick={handleClick} disabled={area === null || area === ''}>
+            <Tweet onClick={handleClick} disabled={area === null || area === '' || loading}>
               {loading ? <Spinner width="1rem" /> : <p>Tweet</p>}
             </Tweet>
           </Header>

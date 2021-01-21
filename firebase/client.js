@@ -12,7 +12,7 @@ const firebaseConfig = {
 
 !firebase.apps.length && firebase.initializeApp(firebaseConfig)
 
-export default firebase
+export const db = firebase.firestore()
 
 const mapUserFromFirebaseAuth = data => {
   const { displayName, email, photoURL, uid } = data

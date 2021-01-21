@@ -3,7 +3,8 @@ import appReducer from './appReducer'
 import appContext from './appContext'
 import axiosClient from '../../config/axiosClient'
 import { useRouter } from 'next/router'
-import firebase from 'firebase/client'
+import { db } from 'firebase/client'
+import firebase from 'firebase'
 import {
   GET_TWEETS_SUCCESS,
   GET_TWEETS_ERROR,
@@ -31,12 +32,18 @@ const AppState = ({ children }) => {
       type: LOADING,
     })
     try {
-      const q = await axiosClient('/api/tweets')
+      const q = await db.collection('tweets').get()
+
+      const res = q.docs.map(doc => {
+        const data = doc.data()
+        data.id = doc.id
+        return data
+      })
+
       dispatch({
         type: GET_TWEETS_SUCCESS,
-        payload: q.data.tweets,
+        payload: res,
       })
-      console.log(q.data.tweets)
     } catch (error) {
       dispatch({
         type: GET_TWEETS_ERROR,
@@ -53,9 +60,29 @@ const AppState = ({ children }) => {
   }
 
   const postTweet = async data => {
+    data = {
+      ...data,
+      createdAt: firebase.firestore.Timestamp.fromDate(new Date()),
+      likes: [],
+      retweets: [],
+      comments: [],
+    }
     dispatch({
       type: LOADING,
     })
+    try {
+      const q = await db.collection('tweets').add(data)
+      dispatch({
+        type: POST_TWEETS_SUCCESS,
+      })
+
+      console.log(q)
+    } catch (error) {
+      dispatch({
+        type: POST_TWEETS_ERROR,
+      })
+      console.log(error)
+    }
     router.replace('/')
   }
 

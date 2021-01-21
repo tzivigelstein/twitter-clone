@@ -35,7 +35,6 @@ export default (state, action) => {
     case POST_TWEETS_ERROR:
       return {
         ...state,
-        msg: action.payload,
         loading: false,
         tweetContent: { area: '' },
       }

@@ -35,14 +35,15 @@ const Index = () => {
                   {tweets.map(tweet => (
                     <Tweet
                       key={tweet.id}
-                      user={tweet.user}
-                      username={tweet.username}
-                      picture={tweet.picture}
+                      id={tweet.id}
+                      user={tweet.displayName}
+                      // username={tweet.username}
+                      picture={tweet.avatar}
                       content={tweet.content}
-                      comments={tweet.comments}
-                      likes={tweet.likes}
-                      retweets={tweet.retweets}
-                      date={tweet.date}
+                      comments={tweet.comments.length}
+                      likes={tweet.likes.length}
+                      retweets={tweet.retweets.length}
+                      date={tweet.createdAt.seconds * 1000}
                     />
                   ))}
                 </>
