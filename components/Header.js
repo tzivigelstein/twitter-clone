@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import styled from '@emotion/styled'
 import { StarIcon } from 'components/Icons'
 import authContext from 'context/auth/authContext'
-import { AvatarPlaceholder } from 'components/onLoadAnimations'
+import { AvatarPlaceholder } from 'components/onLoadAnimations/onLoadAnimations'
 
 const HeaderContainer = styled.div`
   display: flex;
