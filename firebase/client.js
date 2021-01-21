@@ -43,3 +43,8 @@ export const loginWithGoogle = async () => {
 
   return data
 }
+
+export const uploadImage = file => {
+  const ref = firebase.storage().ref(`images/${file.name}`)
+  return ref.put(file)
+}

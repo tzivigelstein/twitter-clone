@@ -9,3 +9,16 @@ export const LOADING = 'GET_TWEETS_LOADING'
 
 export const SET_USER = 'SET_USER'
 export const SET_USER_ERROR = 'SET_USER_ERROR'
+
+export const SET_CHAR = 'SET_CHAR'
+export const SET_DRAG = 'SET_DRAG'
+export const SET_TASK = 'SET_TASK'
+export const SET_IMAGE = 'SET_IMAGE'
+
+export const DRAG_IMAGE_STATES = {
+  ERROR: -1,
+  NONE: 0,
+  DRAG_OVER: 1,
+  UPLOADING: 2,
+  COMPLETE: 3,
+}

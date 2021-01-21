@@ -16,10 +16,14 @@ export const Mobile = styled.div`
   position: relative;
   background-color: #15202b;
   color: #fff;
+  overflow-y: hidden;
+  border-radius: 8px;
 `
 
-export const Container = styled.div`
-  margin: 50px 0 600px 0;
+export const Container = styled.main`
+  margin: 50px 0;
+  overflow-y: auto;
+  max-height: calc(100% - 103px);
 `
 
 export const Title = styled.h1`

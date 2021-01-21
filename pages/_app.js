@@ -8,7 +8,6 @@ const MyApp = ({ Component, pageProps }) => {
     <AuthState>
       <AppState>
         <Head>
-          <title>Twitter</title>
           <link rel="icon" href="/resources/favicon.png" />
         </Head>
         <Component {...pageProps} />

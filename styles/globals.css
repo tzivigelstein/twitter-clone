@@ -1,11 +1,11 @@
 html {
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 *,
 *:after,
 *:before {
-  box-sizing: inherit;
+  box-sizing: border-box;
 }
 
 body {
@@ -13,7 +13,5 @@ body {
     'Helvetica Neue', sans-serif;
   margin: 0;
   padding: 0;
-  background: linear-gradient(90deg, #8899a6 21px, transparent 1%) center,
-    linear-gradient(#8899a6 21px, transparent 1%) center, #15202b;
-  background-size: 22px 22px;
+  background-color: rgb(30, 47, 80);
 }

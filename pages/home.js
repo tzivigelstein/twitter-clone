@@ -8,6 +8,7 @@ import appContext from 'context/app/appContext'
 import Spinner from 'components/Spinner/Spinner'
 import { useRouter } from 'next/router'
 import useUser from 'hooks/useUser'
+import Head from 'next/head'
 
 const Index = () => {
   const { tweets, getTweets, loading } = useContext(appContext)
@@ -25,53 +26,55 @@ const Index = () => {
   }, [user])
 
   return (
-    <Layout>
-      {user ? (
-        <>
-          <div>
-            <Container>
-              {tweets ? (
-                <>
-                  {tweets.map(tweet => (
-                    <Tweet
-                      key={tweet.id}
-                      id={tweet.id}
-                      user={tweet.displayName}
-                      // username={tweet.username}
-                      picture={tweet.avatar}
-                      content={tweet.content}
-                      comments={tweet.comments.length}
-                      likes={tweet.likes.length}
-                      retweets={tweet.retweets.length}
-                      date={tweet.createdAt.seconds * 1000}
-                    />
-                  ))}
-                </>
-              ) : (
-                <>
-                  {loading ? (
-                    <Container>
-                      <div
-                        style={{
-                          marginTop: '50%',
-                        }}
-                      >
-                        <Spinner width="2rem" />
-                      </div>
-                    </Container>
-                  ) : (
-                    <Container>
-                      <ConnectionLost />
-                    </Container>
-                  )}
-                </>
-              )}
-            </Container>
-          </div>
-          <NewIcon />
-        </>
-      ) : null}
-    </Layout>
+    <>
+      <Head>
+        <title>Home / Twitter</title>
+      </Head>
+      <Layout>
+        {user ? (
+          <>
+            {tweets ? (
+              <Container>
+                {tweets.map(tweet => (
+                  <Tweet
+                    key={tweet.id}
+                    id={tweet.id}
+                    user={tweet.displayName}
+                    image={tweet.image ? tweet.image : ''}
+                    // username={tweet.username}
+                    picture={tweet.avatar}
+                    content={tweet.content}
+                    comments={tweet.comments.length}
+                    likes={tweet.likes.length}
+                    retweets={tweet.retweets.length}
+                    date={tweet.createdAt.seconds * 1000}
+                  />
+                ))}
+              </Container>
+            ) : (
+              <>
+                {loading ? (
+                  <Container>
+                    <div
+                      style={{
+                        marginTop: '50%',
+                      }}
+                    >
+                      <Spinner width="2rem" />
+                    </div>
+                  </Container>
+                ) : (
+                  <Container>
+                    <ConnectionLost />
+                  </Container>
+                )}
+              </>
+            )}
+            <NewIcon />
+          </>
+        ) : null}
+      </Layout>
+    </>
   )
 }
 

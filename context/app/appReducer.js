@@ -5,6 +5,10 @@ import {
   POST_TWEETS_ERROR,
   LOADING,
   CAPTURE_TWEET_CONTENT,
+  SET_CHAR,
+  SET_DRAG,
+  SET_TASK,
+  SET_IMAGE,
 } from 'types'
 
 export default (state, action) => {
@@ -37,6 +41,28 @@ export default (state, action) => {
         ...state,
         loading: false,
         tweetContent: { area: '' },
+      }
+
+    case SET_CHAR:
+      return {
+        ...state,
+        char: action.payload,
+      }
+
+    case SET_DRAG:
+      return {
+        ...state,
+        drag: action.payload,
+      }
+    case SET_TASK:
+      return {
+        ...state,
+        task: action.payload,
+      }
+    case SET_IMAGE:
+      return {
+        ...state,
+        image: action.payload,
       }
     default:
       break

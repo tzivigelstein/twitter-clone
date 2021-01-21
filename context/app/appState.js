@@ -11,10 +11,20 @@ import {
   POST_TWEETS_ERROR,
   LOADING,
   CAPTURE_TWEET_CONTENT,
+  SET_CHAR,
+  SET_DRAG,
+  DRAG_IMAGE_STATES,
+  SET_TASK,
+  SET_IMAGE,
 } from 'types'
 
 const AppState = ({ children }) => {
   const initialState = {
+    task: null,
+    image: null,
+    drag: DRAG_IMAGE_STATES.NONE,
+    char: 0,
+    MAX_CHAR: 140,
     tweets: null,
     loading: false,
     msg: null,
@@ -31,7 +41,7 @@ const AppState = ({ children }) => {
       type: LOADING,
     })
     try {
-      const q = await db.collection('tweets').get()
+      const q = await db.collection('tweets').orderBy('createdAt', 'desc').get()
 
       const res = q.docs.map(doc => {
         const data = doc.data()
@@ -85,9 +95,42 @@ const AppState = ({ children }) => {
     router.replace('/')
   }
 
+  const setChar = charLength => {
+    dispatch({
+      type: SET_CHAR,
+      payload: charLength,
+    })
+  }
+
+  const setDrag = type => {
+    dispatch({
+      type: SET_DRAG,
+      payload: type,
+    })
+  }
+
+  const setTask = task => {
+    dispatch({
+      type: SET_TASK,
+      payload: task,
+    })
+  }
+
+  const setImage = image => {
+    dispatch({
+      type: SET_IMAGE,
+      payload: image,
+    })
+  }
+
   return (
     <appContext.Provider
       value={{
+        image: state.image,
+        task: state.task,
+        drag: state.drag,
+        char: state.char,
+        MAX_CHAR: state.MAX_CHAR,
         tweets: state.tweets,
         loading: state.loading,
         msg: state.msg,
@@ -95,6 +138,10 @@ const AppState = ({ children }) => {
         getTweets,
         captureTweetContent,
         postTweet,
+        setChar,
+        setDrag,
+        setTask,
+        setImage,
       }}
     >
       {children}

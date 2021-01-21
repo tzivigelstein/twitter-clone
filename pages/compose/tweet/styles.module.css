@@ -1,0 +1,27 @@
+.preview_container {
+  width: 95%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin: 1rem auto;
+}
+
+.preview {
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 15px;
+}
+
+.times_container {
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  display: flex;
+  width: 2rem;
+  height: 2rem;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}

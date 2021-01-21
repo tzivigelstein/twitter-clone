@@ -3,9 +3,9 @@ import Spinner from 'components/Spinner/Spinner'
 import authContext from 'context/auth/authContext'
 import styled from '@emotion/styled'
 import { ExternalContainer, Mobile } from 'components/Globals'
-import { onAuthStateChanged } from 'firebase/client'
 import { useRouter } from 'next/router'
 import useUser from 'hooks/useUser'
+import Head from 'next/head'
 
 const SplashContainer = styled.div`
   display: flex;
@@ -31,6 +31,9 @@ const Index = () => {
 
   return (
     <>
+      <Head>
+        <title>Twitter</title>
+      </Head>
       {loading ? (
         <ExternalContainer>
           <Mobile>

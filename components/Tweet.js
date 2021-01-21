@@ -27,6 +27,19 @@ const Content = styled.span`
   font-size: 14px;
 `
 
+const ImageContainer = styled.div`
+  display: flex;
+  margin: 0.8rem 0;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`
+
+const Image = styled.img`
+  width: 100%;
+  border-radius: 10px;
+`
+
 const User = styled.span`
   font-size: 14px;
   font-weight: bold;
@@ -60,7 +73,7 @@ const Numbers = styled.span`
   margin-left: 0.4rem;
 `
 
-const Tweet = ({ user, username, picture, content, comments, likes, retweets, date }) => {
+const Tweet = ({ user, username, picture, content, comments, likes, retweets, date, image }) => {
   const timeago = useTime(date)
 
   return (
@@ -75,6 +88,11 @@ const Tweet = ({ user, username, picture, content, comments, likes, retweets, da
           <Username>{timeago}</Username>
         </div>
         <Content>{content}</Content>
+        {image && (
+          <ImageContainer>
+            <Image src={image} />
+          </ImageContainer>
+        )}
         <Interaction>
           <InteractionIcon>
             <CommentIcon />
