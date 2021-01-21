@@ -12,6 +12,7 @@
 }
 
 .back {
+  width: 3rem;
   padding: 1rem;
   cursor: pointer;
 }

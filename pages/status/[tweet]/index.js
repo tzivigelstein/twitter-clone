@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import Head from 'next/head'
 import styles from 'pages/status/[tweet]/styles.module.css'
 import { ArrowLeftIcon, CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
@@ -6,7 +5,7 @@ import Link from 'next/link'
 import useTime from 'hooks/useTime'
 
 export default function TweetPage(props) {
-  const { avatar, comments, likes, retweets, content, displayName, userId, image, createdAt } = props
+  const { avatar, comments, likes, retweets, content, displayName, image, createdAt } = props
 
   const [rtf, dtf] = useTime(createdAt._seconds * 1000)
 
@@ -26,7 +25,7 @@ export default function TweetPage(props) {
         <div>
           <span className={styles.title}>Tweet</span>
         </div>
-        <div></div>
+        <div className={styles.back}></div>
       </header>
       <div className={styles.container}>
         <div className={styles.innerContainer}>
@@ -87,9 +86,18 @@ export default function TweetPage(props) {
   )
 }
 
-TweetPage.getInitialProps = context => {
-  const { tweet } = context.query
-  return fetch(`http://localhost:3000/api/tweets/${tweet}`).then(res => {
-    if (res.ok) return res.json()
-  })
+export async function getServerSideProps(context) {
+  const { params, res } = context
+  const { tweet } = params
+
+  const apiRes = await fetch(`http://localhost:3000/api/tweets/${tweet}`)
+
+  if (apiRes.ok) {
+    const props = await apiRes.json()
+    return { props }
+  }
+
+  if (res) {
+    res.writeHead(301, { Location: '/home' }).end()
+  }
 }
