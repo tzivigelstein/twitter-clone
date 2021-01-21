@@ -5,7 +5,7 @@ import { ArrowLeftIcon } from 'components/Icons'
 import appContext from 'context/app/appContext'
 import Spinner from 'components/Spinner/Spinner'
 import { ExternalContainer, Mobile } from 'components/Globals'
-import { AvatarPlaceholder } from 'components/onLoadAnimations'
+// import { AvatarPlaceholder } from 'components/onLoadAnimations'
 import useUser from 'hooks/useUser'
 import { useRouter } from 'next/router'
 
@@ -141,7 +141,13 @@ const Index = () => {
           </Header>
           <NewTweeetContainer>
             <PictureContainer>
-              {user ? <Picture src={user.photoURL} /> : <AvatarPlaceholder width="46px" />}
+              {user ? (
+                <Picture src={user.photoURL} />
+              ) : (
+                {
+                  /* <AvatarPlaceholder width="46px" /> */
+                }
+              )}
             </PictureContainer>
             <TextArea
               maxLength={`${MAX_CHAR}`}
