@@ -1,12 +1,19 @@
 import styled from '@emotion/styled'
 import { CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
 import useTime from 'hooks/useTime'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 const TweetContainer = styled.article`
   border-bottom: 1px solid rgb(56, 68, 77);
   width: 100%;
   padding: 0.6rem 1rem;
   display: flex;
+  &:hover {
+    cursor: pointer;
+    backdrop-filter: brightness(120%);
+  }
 `
 
 const PictureContainer = styled.div`
@@ -17,6 +24,11 @@ const Picture = styled.img`
   width: 46px;
   border-radius: 50%;
   cursor: pointer;
+  transition: 0.3s ease;
+
+  &:hover {
+    filter: brightness(85%);
+  }
 `
 
 const ContentContainer = styled.div`
@@ -44,7 +56,7 @@ const User = styled.span`
   font-size: 14px;
   font-weight: bold;
   &:hover {
-    color: #2b7bb9;
+    text-decoration: underline;
     cursor: pointer;
   }
 `
@@ -55,10 +67,31 @@ const Username = styled.span`
   margin: 0 0.4rem;
 `
 
+const Time = styled.time`
+  font-size: 14px;
+  color: #8899a6;
+  margin: 0 0.4rem;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+  }
+`
+
+const Tooltip = styled.div`
+  background-color: #8899a6;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  position: absolute;
+  padding: 0.2rem;
+  top: -1rem;
+  left: 3rem;
+`
+
 const Interaction = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 1rem;
+  margin-top: 0.7rem;
 `
 
 const InteractionIcon = styled.span`
@@ -73,19 +106,40 @@ const Numbers = styled.span`
   margin-left: 0.4rem;
 `
 
-const Tweet = ({ user, username, picture, content, comments, likes, retweets, date, image }) => {
-  const timeago = useTime(date)
+const Tweet = ({ id, user, username, picture, content, comments, likes, retweets, date, image }) => {
+  const [rtf, dtf] = useTime(date)
+  const [showDate, setShowDate] = useState(false)
+
+  const router = useRouter()
+
+  const handleMouseEnter = () => {
+    setShowDate(true)
+  }
+
+  const handleMouseLeave = () => {
+    setShowDate(false)
+  }
+
+  const handleArticleClick = e => {
+    e.preventDefault()
+    router.push(`/status/${id}`)
+  }
 
   return (
-    <TweetContainer>
+    <TweetContainer onClick={handleArticleClick}>
       <PictureContainer>
         <Picture src={picture} />
       </PictureContainer>
       <ContentContainer>
-        <div>
+        <div style={{ position: 'relative' }}>
           <User>{user}</User>
           <Username>{username}</Username>
-          <Username>{timeago}</Username>
+          <Link href={`/status/${id}`}>
+            <Time onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} dateTime={dtf}>
+              {rtf}
+            </Time>
+          </Link>
+          {showDate && <Tooltip>{dtf}</Tooltip>}
         </div>
         <Content>{content}</Content>
         {image && (

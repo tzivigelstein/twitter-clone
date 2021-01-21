@@ -2,7 +2,6 @@ import { useContext, useEffect } from 'react'
 import Spinner from 'components/Spinner/Spinner'
 import authContext from 'context/auth/authContext'
 import styled from '@emotion/styled'
-import { ExternalContainer, Mobile } from 'components/Globals'
 import { useRouter } from 'next/router'
 import useUser from 'hooks/useUser'
 import Head from 'next/head'
@@ -35,21 +34,13 @@ const Index = () => {
         <title>Twitter</title>
       </Head>
       {loading ? (
-        <ExternalContainer>
-          <Mobile>
-            <SplashContainer>
-              <Spinner />
-            </SplashContainer>
-          </Mobile>
-        </ExternalContainer>
+        <SplashContainer>
+          <Spinner />
+        </SplashContainer>
       ) : (
-        <ExternalContainer>
-          <Mobile>
-            <SplashContainer>
-              <img src="/resources/favicon.png" alt="" />
-            </SplashContainer>
-          </Mobile>
-        </ExternalContainer>
+        <SplashContainer>
+          <img src="/resources/favicon.png" alt="" />
+        </SplashContainer>
       )}
     </>
   )

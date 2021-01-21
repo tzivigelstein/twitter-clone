@@ -30,11 +30,24 @@ const useTime = timestamp => {
 
     return () => clearInterval(interval)
   }, [timestamp])
-  const relativeTimeFormat = new Intl.RelativeTimeFormat(navigator.language, {
-    style: 'short',
+
+  const relativeTimeFormat = new Intl.RelativeTimeFormat(
+    typeof navigator === 'undefined' ? 'es-ES' : navigator.language,
+    {
+      style: 'short',
+    }
+  )
+
+  const dateTimeFormatLarge = new Intl.DateTimeFormat(typeof navigator === 'undefined' ? 'es-ES' : navigator.language, {
+    dateStyle: 'long',
+    timeStyle: 'short',
   })
+
   const { value, unit } = timeago
-  return relativeTimeFormat.format(value, unit)
+
+  const rtf = relativeTimeFormat.format(value, unit)
+  const dtf = dateTimeFormatLarge.format(new Date(timestamp))
+  return [rtf, dtf]
 }
 
 export default useTime

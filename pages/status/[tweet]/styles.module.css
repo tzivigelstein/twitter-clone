@@ -1,0 +1,120 @@
+.header {
+  width: 100%;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #15202b;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(56, 68, 77);
+}
+
+.back {
+  padding: 1rem;
+  cursor: pointer;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.container {
+  margin-top: 50px;
+}
+
+.innerContainer {
+  padding: 0.6rem 1rem;
+}
+
+.avatarContainer {
+  width: 46px;
+  margin-right: 1rem;
+}
+
+.avatar {
+  border-radius: 50%;
+  width: 100%;
+}
+
+.userInfoContainer {
+  display: flex;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.user {
+  font-weight: bold;
+  font-size: 1rem;
+  margin: 0.2rem;
+}
+
+.username {
+  font-size: 1rem;
+  color: #8899a6;
+  margin: 0.2rem;
+}
+
+.contentContainer {
+  margin: 0.6rem 0;
+}
+
+.content {
+  font-size: 23px;
+  margin-bottom: 1rem;
+}
+
+.image {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.dateInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 1rem 0.8rem 1rem;
+}
+
+.date {
+  color: #8899a6;
+}
+
+.date:hover {
+  text-decoration: underline;
+}
+
+.interactionInfo {
+  border-bottom: 1px solid rgb(56, 68, 77);
+}
+
+.interactionBorder {
+  padding: 0.6rem 0;
+  width: 95%;
+  margin: 0 auto;
+  border-top: 1px solid rgb(56, 68, 77);
+  display: flex;
+  justify-content: space-around;
+}
+
+.lightText {
+  color: #8899a6;
+}
+
+.interactionContainer {
+  display: flex;
+  justify-content: space-around;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid rgb(56, 68, 77);
+}
+
+.interactionIcon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}

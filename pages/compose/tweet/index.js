@@ -4,7 +4,6 @@ import styled from '@emotion/styled'
 import { ArrowLeftIcon, Times } from 'components/Icons'
 import appContext from 'context/app/appContext'
 import Spinner from 'components/Spinner/Spinner'
-import { ExternalContainer, Mobile } from 'components/Globals'
 import { AvatarPlaceholder } from 'components/onLoadAnimations/onLoadAnimations'
 import useUser from 'hooks/useUser'
 import { useRouter } from 'next/router'
@@ -100,41 +99,37 @@ const Index = () => {
       <Head>
         <title>Compose Tweet / Twitter</title>
       </Head>
-      <ExternalContainer>
-        <Mobile>
-          <div>
-            <Header>
-              <Link href="/home">
-                <Back>
-                  <ArrowLeftIcon />
-                </Back>
-              </Link>
-              <Tweet onClick={handleClick} disabled={area === null || area === '' || loading}>
-                {loading ? <Spinner width="1rem" /> : <p>Tweet</p>}
-              </Tweet>
-            </Header>
-            <NewTweeetContainer>
-              <PictureContainer>
-                {user ? <Picture src={user.photoURL} /> : <AvatarPlaceholder width="46px" />}
-              </PictureContainer>
-              <TextArea></TextArea>
-            </NewTweeetContainer>
+      <div>
+        <Header>
+          <Link href="/home">
+            <Back>
+              <ArrowLeftIcon />
+            </Back>
+          </Link>
+          <Tweet onClick={handleClick} disabled={area === null || area === '' || loading}>
+            {loading ? <Spinner width="1rem" /> : <p>Tweet</p>}
+          </Tweet>
+        </Header>
+        <NewTweeetContainer>
+          <PictureContainer>
+            {user ? <Picture src={user.photoURL} /> : <AvatarPlaceholder width="46px" />}
+          </PictureContainer>
+          <TextArea></TextArea>
+        </NewTweeetContainer>
+      </div>
+      <CounterContainer>
+        <Counter>
+          {char}/{MAX_CHAR}
+        </Counter>
+      </CounterContainer>
+      {image && (
+        <div className={styles.preview_container}>
+          <img className={styles.preview} src={image} alt="" />
+          <div onClick={() => setImage(null)} className={styles.times_container}>
+            <Times />
           </div>
-          <CounterContainer>
-            <Counter>
-              {char}/{MAX_CHAR}
-            </Counter>
-          </CounterContainer>
-          {image && (
-            <div className={styles.preview_container}>
-              <img className={styles.preview} src={image} alt="" />
-              <div onClick={() => setImage(null)} className={styles.times_container}>
-                <Times />
-              </div>
-            </div>
-          )}
-        </Mobile>
-      </ExternalContainer>
+        </div>
+      )}
     </>
   )
 }

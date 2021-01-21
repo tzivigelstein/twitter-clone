@@ -15,7 +15,6 @@ export const Mobile = styled.div`
   max-height: 851px;
   position: relative;
   background-color: #15202b;
-  color: #fff;
   overflow-y: hidden;
   border-radius: 8px;
 `
