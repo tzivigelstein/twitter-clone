@@ -7,7 +7,7 @@ import useTime from 'hooks/useTime'
 export default function TweetPage(props) {
   const { avatar, comments, likes, retweets, content, displayName, image, createdAt } = props
 
-  const [rtf, dtf] = useTime(createdAt._seconds * 1000)
+  const [_, dtf] = useTime(createdAt._seconds * 1000)
 
   return (
     <>
