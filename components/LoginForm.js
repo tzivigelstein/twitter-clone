@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import {
   FormContainer,
   Form,
@@ -10,11 +10,11 @@ import {
   ExternalLogin,
   LoginGoogle,
   LoginGithub,
-} from './Globals'
-import styles from './form.module.css'
+} from 'components/Globals'
+import styles from 'components/form.module.css'
 import authContext from 'context/auth/authContext'
-import FormHelper from './FormHelper'
-import { loginWithGoogle, loginWithGithub } from 'firebase/client'
+import FormHelper from 'components/FormHelper'
+import { loginWithGoogle } from 'firebase/client'
 import { useRouter } from 'next/router'
 
 const LoginForm = () => {

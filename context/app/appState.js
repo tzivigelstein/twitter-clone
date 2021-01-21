@@ -1,7 +1,6 @@
 import { useReducer } from 'react'
-import appReducer from './appReducer'
-import appContext from './appContext'
-import axiosClient from '../../config/axiosClient'
+import appReducer from 'context/app/appReducer'
+import appContext from 'context/app/appContext'
 import { useRouter } from 'next/router'
 import { db } from 'firebase/client'
 import firebase from 'firebase'
@@ -12,7 +11,7 @@ import {
   POST_TWEETS_ERROR,
   LOADING,
   CAPTURE_TWEET_CONTENT,
-} from '../../types'
+} from 'types'
 
 const AppState = ({ children }) => {
   const initialState = {

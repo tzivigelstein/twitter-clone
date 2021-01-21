@@ -1,7 +1,7 @@
-import AppState from '../context/app/appState'
-import AuthState from '../context/auth/authState'
+import AppState from 'context/app/appState'
+import AuthState from 'context/auth/authState'
 import Head from 'next/head'
-import '../styles/globals.css'
+import 'styles/globals.css'
 
 const MyApp = ({ Component, pageProps }) => {
   return (

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { HomeIcon, SearchIcon, BellIcon, MailIcon } from './Icons'
+import { HomeIcon, SearchIcon, BellIcon, MailIcon } from 'components/Icons'
 
 const NavContainer = styled.div`
   display: flex;

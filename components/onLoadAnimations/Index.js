@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import styles from './styles.module.css'
+import styles from 'components/onLoadAnimations/styles.module.css'
 
 export const AvatarPlaceholder = ({ width = '28px' }) => {
   const Avatar = styled.div`

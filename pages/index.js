@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import Spinner from 'components/Spinner/Spinner'
 import authContext from 'context/auth/authContext'
 import styled from '@emotion/styled'

@@ -5,7 +5,7 @@ import {
   POST_TWEETS_ERROR,
   LOADING,
   CAPTURE_TWEET_CONTENT,
-} from '../../types'
+} from 'types'
 
 export default (state, action) => {
   switch (action.type) {

@@ -1,7 +1,7 @@
 import { useReducer } from 'react'
-import authReducer from './authReducer'
-import authContext from './authContext'
-import { SET_USER, SET_USER_ERROR } from '../../types'
+import authReducer from 'context/auth/authReducer'
+import authContext from 'context/auth/authContext'
+import { SET_USER, SET_USER_ERROR } from 'types'
 
 const AppState = ({ children }) => {
   const initialState = {

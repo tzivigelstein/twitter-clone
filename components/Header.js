@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import styled from '@emotion/styled'
-import { StarIcon } from './Icons'
+import { StarIcon } from 'components/Icons'
 import authContext from 'context/auth/authContext'
-import { AvatarPlaceholder } from './onLoadAnimations'
+import { AvatarPlaceholder } from 'components/onLoadAnimations'
 
 const HeaderContainer = styled.div`
   display: flex;

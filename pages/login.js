@@ -1,9 +1,7 @@
-import React, { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import styled from '@emotion/styled'
 import { ExternalContainer, Mobile, Title } from 'components/Globals'
 import LoginForm from 'components/LoginForm'
-import authContext from 'context/auth/authContext'
-import { onAuthStateChanged } from 'firebase/client'
 import { useRouter } from 'next/router'
 import useUser from 'hooks/useUser'
 

@@ -1,6 +1,6 @@
-import Header from './Header'
-import Nav from './Nav'
-import { ExternalContainer, Mobile } from './Globals'
+import Header from 'components/Header'
+import Nav from 'components/Nav'
+import { ExternalContainer, Mobile } from 'components/Globals'
 
 const Layout = ({ children }) => {
   return (

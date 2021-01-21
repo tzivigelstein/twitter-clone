@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
-import { CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from './Icons'
+import { CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
 import useTime from 'hooks/useTime'
 
 const TweetContainer = styled.article`
