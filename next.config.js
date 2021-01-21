@@ -1,3 +1,8 @@
+const path = require('path')
+
 module.exports = {
-  env: {},
+  webpack: config => {
+    config.resolve.modules.push(path.resolve('./'))
+    return config
+  },
 }
