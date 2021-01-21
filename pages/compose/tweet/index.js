@@ -5,7 +5,7 @@ import { ArrowLeftIcon } from 'components/Icons'
 import appContext from 'context/app/appContext'
 import Spinner from 'components/Spinner/Spinner'
 import { ExternalContainer, Mobile } from 'components/Globals'
-import { AvatarPlaceholder } from 'components/Placeholders'
+import { AvatarPlaceholder } from 'components/Placeholders/Index'
 import useUser from 'hooks/useUser'
 import { useRouter } from 'next/router'
 
