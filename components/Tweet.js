@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
-import useTime from 'hooks/useTime'
+import useDateFormat from 'hooks/useDateFormat'
+import useTimeAgo from 'hooks/useTimeAgo'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -107,7 +108,8 @@ const Numbers = styled.span`
 `
 
 const Tweet = ({ id, user, username, picture, content, comments, likes, retweets, date, image }) => {
-  const [rtf, dtf] = useTime(date)
+  const timeago = useTimeAgo(date)
+  const formatDate = useDateFormat(date)
   const [showDate, setShowDate] = useState(false)
 
   const router = useRouter()
@@ -135,11 +137,11 @@ const Tweet = ({ id, user, username, picture, content, comments, likes, retweets
           <User>{user}</User>
           <Username>{username}</Username>
           <Link href={`/status/${id}`}>
-            <Time onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} dateTime={dtf}>
-              {rtf}
+            <Time onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} dateTime={formatDate}>
+              {timeago}
             </Time>
           </Link>
-          {showDate && <Tooltip>{dtf}</Tooltip>}
+          {showDate && <Tooltip>{formatDate}</Tooltip>}
         </div>
         <Content>{content}</Content>
         {image && (

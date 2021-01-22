@@ -36,29 +36,51 @@ const AppState = ({ children }) => {
 
   const router = useRouter()
 
-  const getTweets = async () => {
+  const listenLatestTweets = callback => {
+    return db
+      .collection('tweets')
+      .orderBy('createdAt', 'desc')
+      .limit(20)
+      .onSnapshot(({ docs }) => {
+        const newTweets = docs.map(mapTweetsToObject)
+        callback(newTweets)
+      })
+  }
+
+  const mapTweetsToObject = doc => {
+    const data = doc.data()
+    const id = doc.id
+
+    return {
+      ...data,
+      id,
+    }
+  }
+
+  const getTweets = mapFunction => {
     dispatch({
       type: LOADING,
     })
-    try {
-      const q = await db.collection('tweets').orderBy('createdAt', 'desc').get()
-
-      const res = q.docs.map(doc => {
-        const data = doc.data()
-        data.id = doc.id
-        return data
+    return db
+      .collection('tweets')
+      .orderBy('createdAt', 'desc')
+      .get()
+      .then(({ docs }) => {
+        return docs.map(mapFunction)
       })
-
-      dispatch({
-        type: GET_TWEETS_SUCCESS,
-        payload: res,
+      .then(res => {
+        dispatch({
+          type: GET_TWEETS_SUCCESS,
+          payload: res,
+        })
+        return res
       })
-    } catch (error) {
-      dispatch({
-        type: GET_TWEETS_ERROR,
+      .catch(err => {
+        console.log(err)
+        dispatch({
+          type: GET_TWEETS_ERROR,
+        })
       })
-      console.log(error)
-    }
   }
 
   const captureTweetContent = data => {
@@ -84,8 +106,6 @@ const AppState = ({ children }) => {
       dispatch({
         type: POST_TWEETS_SUCCESS,
       })
-
-      console.log(q)
     } catch (error) {
       dispatch({
         type: POST_TWEETS_ERROR,
@@ -135,6 +155,7 @@ const AppState = ({ children }) => {
         loading: state.loading,
         msg: state.msg,
         tweetContent: state.tweetContent,
+        listenLatestTweets,
         getTweets,
         captureTweetContent,
         postTweet,

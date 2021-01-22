@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Layout from 'components/Layout'
 import Tweet from 'components/Tweet'
 import { Container } from 'components/Globals'
@@ -11,18 +11,26 @@ import useUser from 'hooks/useUser'
 import Head from 'next/head'
 
 const Index = () => {
-  const { tweets, getTweets, loading } = useContext(appContext)
+  const { loading, listenLatestTweets } = useContext(appContext)
 
   const router = useRouter()
 
   const user = useUser()
+
+  const [tweets, setTweets] = useState(null)
 
   useEffect(() => {
     user === null && router.replace('/login')
   }, [user])
 
   useEffect(() => {
-    user && getTweets()
+    let unsubscribe
+
+    if (user) {
+      unsubscribe = listenLatestTweets(setTweets)
+    }
+
+    return () => unsubscribe && unsubscribe()
   }, [user])
 
   return (

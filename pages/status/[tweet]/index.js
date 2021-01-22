@@ -2,12 +2,18 @@ import Head from 'next/head'
 import styles from 'pages/status/[tweet]/styles.module.css'
 import { ArrowLeftIcon, CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
 import Link from 'next/link'
-import useTime from 'hooks/useTime'
+import { firestore } from 'firebase/admin'
+import { useRouter } from 'next/router'
+import useDateFormat from 'hooks/useDateFormat'
 
 export default function TweetPage(props) {
+  const router = useRouter()
+
+  if (router.isFallback) return <h1>Loading...</h1>
+
   const { avatar, comments, likes, retweets, content, displayName, image, createdAt } = props
 
-  const [_, dtf] = useTime(createdAt._seconds * 1000)
+  const formatDate = useDateFormat(createdAt * 1000)
 
   return (
     <>
@@ -44,7 +50,7 @@ export default function TweetPage(props) {
           </div>
         </div>
         <div className={styles.dateInfo}>
-          <span className={styles.date}>{dtf}</span>
+          <span className={styles.date}>{formatDate}</span>
         </div>
         <div className={styles.interactionInfo}>
           <div className={styles.interactionBorder}>
@@ -86,18 +92,32 @@ export default function TweetPage(props) {
   )
 }
 
-export async function getServerSideProps(context) {
-  const { params, res } = context
-  const { tweet } = params
-
-  const apiRes = await fetch(`http://localhost:3000/api/tweets/${tweet}`)
-
-  if (apiRes.ok) {
-    const props = await apiRes.json()
-    return { props }
+export async function getStaticPaths() {
+  return {
+    paths: [{ params: { tweet: 'fZ4lUKJZjo10gnW9h7WD' } }],
+    fallback: true,
   }
+}
 
-  if (res) {
-    res.writeHead(301, { Location: '/home' }).end()
-  }
+export async function getStaticProps(context) {
+  const { tweet } = context.params
+
+  return firestore
+    .collection('tweets')
+    .doc(tweet)
+    .get()
+    .then(doc => {
+      const data = doc.data()
+      const id = doc.id
+      const props = {
+        ...data,
+        id,
+        createdAt: data.createdAt._seconds,
+      }
+      return { props: props }
+    })
+    .catch(error => {
+      console.log(error)
+      return { props: {} }
+    })
 }
