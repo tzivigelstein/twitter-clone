@@ -102,7 +102,7 @@ const AppState = ({ children }) => {
       type: LOADING,
     })
     try {
-      const q = await db.collection('tweets').add(data)
+      await db.collection('tweets').add(data)
       dispatch({
         type: POST_TWEETS_SUCCESS,
       })
