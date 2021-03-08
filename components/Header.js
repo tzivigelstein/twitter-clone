@@ -19,7 +19,7 @@ const HeaderContainer = styled.div`
 `
 
 const UserIcon = styled.img`
-  width: 28px;
+  width: 32px;
   border-radius: 50%;
 `
 

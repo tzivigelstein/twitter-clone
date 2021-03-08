@@ -57,7 +57,7 @@ const AppState = ({ children }) => {
     }
   }
 
-  const getTweets = mapFunction => {
+  const getTweets = async mapFunction => {
     dispatch({
       type: LOADING,
     })
@@ -115,6 +115,36 @@ const AppState = ({ children }) => {
     router.replace('/')
   }
 
+  const like = async data => {
+    const { tweetId, userId, likes } = data
+    if (likes.includes(userId)) {
+      try {
+        dispatch({
+          type: LOADING,
+        })
+        await db
+          .collection('tweets')
+          .doc(tweetId)
+          .update({ likes: likes.filter(like => like !== userId) })
+      } catch (error) {
+        console.log(error)
+      }
+      return
+    }
+
+    try {
+      dispatch({
+        type: LOADING,
+      })
+      await db
+        .collection('tweets')
+        .doc(tweetId)
+        .update({ likes: [...likes, userId] })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   const setChar = charLength => {
     dispatch({
       type: SET_CHAR,
@@ -159,6 +189,7 @@ const AppState = ({ children }) => {
         getTweets,
         captureTweetContent,
         postTweet,
+        like,
         setChar,
         setDrag,
         setTask,

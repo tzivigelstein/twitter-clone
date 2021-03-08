@@ -1,12 +1,13 @@
 import Header from 'components/Header'
 import Nav from 'components/Nav'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, layoutConfig }) => {
+  const { title } = layoutConfig
   return (
     <>
-      <Header />
+      <Header title={title} />
       {children}
-      <Nav />
+      <Nav layoutConfig={layoutConfig} />
     </>
   )
 }

@@ -33,31 +33,42 @@ const Index = () => {
     return () => unsubscribe && unsubscribe()
   }, [user])
 
+  const layoutConfig = {
+    title: 'Home',
+    home: true,
+    explore: false,
+    notifications: false,
+    directs: false,
+  }
+
   return (
     <>
       <Head>
         <title>Home / Twitter</title>
       </Head>
-      <Layout>
+      <Layout layoutConfig={layoutConfig}>
         {user ? (
           <>
             {tweets ? (
               <Container>
-                {tweets.map(tweet => (
-                  <Tweet
-                    key={tweet.id}
-                    id={tweet.id}
-                    user={tweet.displayName}
-                    image={tweet.image ? tweet.image : ''}
-                    // username={tweet.username}
-                    picture={tweet.avatar}
-                    content={tweet.content}
-                    comments={tweet.comments.length}
-                    likes={tweet.likes.length}
-                    retweets={tweet.retweets.length}
-                    date={tweet.createdAt.seconds * 1000}
-                  />
-                ))}
+                {tweets.map(tweet => {
+                  return (
+                    <Tweet
+                      liked={tweet.likes.includes(user.uid)}
+                      key={tweet.id}
+                      id={tweet.id}
+                      displayName={tweet.displayName}
+                      image={tweet.image ? tweet.image : ''}
+                      // username={tweet.username}
+                      picture={tweet.avatar}
+                      content={tweet.content}
+                      comments={tweet.comments}
+                      likes={tweet.likes}
+                      retweets={tweet.retweets}
+                      date={tweet.createdAt.seconds * 1000}
+                    />
+                  )
+                })}
               </Container>
             ) : (
               <>

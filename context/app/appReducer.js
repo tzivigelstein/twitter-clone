@@ -41,6 +41,7 @@ export default (state, action) => {
         ...state,
         loading: false,
         tweetContent: { area: '' },
+        char: 0,
       }
 
     case SET_CHAR:

@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { HomeIcon, SearchIcon, BellIcon, MailIcon } from 'components/Icons'
+import Link from 'next/link'
 
 const NavContainer = styled.div`
   display: flex;
@@ -22,25 +23,31 @@ const IconContainer = styled.div`
   width: 100%;
   height: 100%;
 `
-const Icon = styled.img`
-  width: 12px;
-`
 
-const Nav = () => {
+const Nav = ({ layoutConfig }) => {
+  const { home, explore, notifications, directs } = layoutConfig
   return (
     <NavContainer>
-      <IconContainer>
-        <HomeIcon />
-      </IconContainer>
-      <IconContainer>
-        <SearchIcon />
-      </IconContainer>
-      <IconContainer>
-        <BellIcon />
-      </IconContainer>
-      <IconContainer>
-        <MailIcon />
-      </IconContainer>
+      <Link href="/home">
+        <IconContainer>
+          <HomeIcon fill={home ? '#1da1f2' : '#8899a6'} width={26} height />
+        </IconContainer>
+      </Link>
+      <Link href="/explore">
+        <IconContainer>
+          <SearchIcon fill={explore ? '#1da1f2' : '#8899a6'} width={26} height />
+        </IconContainer>
+      </Link>
+      <Link href="/notifications">
+        <IconContainer>
+          <BellIcon fill={notifications ? '#1da1f2' : '#8899a6'} width={26} height />
+        </IconContainer>
+      </Link>
+      <Link href="messages">
+        <IconContainer>
+          <MailIcon fill={directs ? '#1da1f2' : '#8899a6'} width={26} height />
+        </IconContainer>
+      </Link>
     </NavContainer>
   )
 }

@@ -1,17 +1,19 @@
 import styled from '@emotion/styled'
-import { CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
+import { CommentIcon, FilledLikeIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
+import appContext from 'context/app/appContext'
+import authContext from 'context/auth/authContext'
 import useDateFormat from 'hooks/useDateFormat'
 import useTimeAgo from 'hooks/useTimeAgo'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 const TweetContainer = styled.article`
   border-bottom: 1px solid rgb(56, 68, 77);
   width: 100%;
   padding: 0.6rem 1rem;
   display: flex;
-  &:hover {
+  &:active {
     cursor: pointer;
     backdrop-filter: brightness(120%);
   }
@@ -27,7 +29,7 @@ const Picture = styled.img`
   cursor: pointer;
   transition: 0.3s ease;
 
-  &:hover {
+  &:active {
     filter: brightness(85%);
   }
 `
@@ -56,7 +58,7 @@ const Image = styled.img`
 const User = styled.span`
   font-size: 14px;
   font-weight: bold;
-  &:hover {
+  &:active {
     text-decoration: underline;
     cursor: pointer;
   }
@@ -73,7 +75,7 @@ const Time = styled.time`
   color: #8899a6;
   margin: 0 0.4rem;
 
-  &:hover {
+  &:active {
     text-decoration: underline;
     cursor: pointer;
   }
@@ -107,10 +109,12 @@ const Numbers = styled.span`
   margin-left: 0.4rem;
 `
 
-const Tweet = ({ id, user, username, picture, content, comments, likes, retweets, date, image }) => {
+const Tweet = ({ liked, id, displayName, username, picture, content, comments, likes, retweets, date, image }) => {
   const timeago = useTimeAgo(date)
   const formatDate = useDateFormat(date)
   const [showDate, setShowDate] = useState(false)
+  const { like } = useContext(appContext)
+  const { user } = useContext(authContext)
 
   const router = useRouter()
 
@@ -127,6 +131,20 @@ const Tweet = ({ id, user, username, picture, content, comments, likes, retweets
     router.push(`/status/${id}`)
   }
 
+  const handleLike = e => {
+    const data = {
+      tweetId: id,
+      userId: user.uid,
+      likes,
+    }
+    like(data)
+    if (!e) {
+      var e = window.event
+    }
+    e.cancelBubble = true
+    if (e.stopPropagation) e.stopPropagation()
+  }
+
   return (
     <TweetContainer onClick={handleArticleClick}>
       <PictureContainer>
@@ -134,7 +152,7 @@ const Tweet = ({ id, user, username, picture, content, comments, likes, retweets
       </PictureContainer>
       <ContentContainer>
         <div style={{ position: 'relative' }}>
-          <User>{user}</User>
+          <User>{displayName}</User>
           <Username>{username}</Username>
           <Link href={`/status/${id}`}>
             <Time onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} dateTime={formatDate}>
@@ -152,15 +170,19 @@ const Tweet = ({ id, user, username, picture, content, comments, likes, retweets
         <Interaction>
           <InteractionIcon>
             <CommentIcon />
-            <Numbers>{comments}</Numbers>
+            <Numbers>{comments.length}</Numbers>
           </InteractionIcon>
           <InteractionIcon>
             <RetweetIcon />
-            <Numbers>{retweets}</Numbers>
+            <Numbers>{retweets.length}</Numbers>
           </InteractionIcon>
           <InteractionIcon>
-            <LikeIcon />
-            <Numbers>{likes}</Numbers>
+            {liked ? (
+              <FilledLikeIcon onClick={handleLike} />
+            ) : (
+              <LikeIcon fill="#8899a6" stroke="none" onClick={handleLike} />
+            )}
+            <Numbers>{likes.length}</Numbers>
           </InteractionIcon>
           <span>
             <ShareIcon />

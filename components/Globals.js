@@ -17,6 +17,10 @@ export const Mobile = styled.div`
   background-color: #15202b;
   overflow-y: hidden;
   border-radius: 8px;
+
+  @media (max-width: 480px) {
+    border-radius: 0;
+  }
 `
 
 export const Container = styled.main`
