@@ -37,7 +37,7 @@ const Login = () => {
 
   useEffect(() => {
     user && router.replace('/home')
-  }, [])
+  }, [user])
 
   return (
     <>
