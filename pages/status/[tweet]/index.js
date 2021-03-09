@@ -15,7 +15,6 @@ export default function TweetPage(props) {
 
   const formatDate = useDateFormat(createdAt * 1000)
 
-
   return (
     <>
       <Head>
@@ -86,11 +85,7 @@ export default function TweetPage(props) {
             <RetweetIcon width={22.5} height={22.5} />
           </span>
           <span className={styles.interactionIcon}>
-            {id !== null && likes.includes(user.uid) ? (
-              <FilledLikeIcon width={22.5} height={22.5} />
-            ) : (
-              <LikeIcon width={22.5} height={22.5} fill="#8899a6" stroke="none" />
-            )}
+            <LikeIcon width={22.5} height={22.5} fill="#8899a6" stroke="none" />
           </span>
           <span>
             <ShareIcon width={22.5} height={22.5} />
