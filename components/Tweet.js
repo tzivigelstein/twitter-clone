@@ -109,7 +109,20 @@ const Numbers = styled.span`
   margin-left: 0.4rem;
 `
 
-const Tweet = ({ liked, id, displayName, username, picture, content, comments, likes, retweets, date, image }) => {
+const Tweet = ({
+  liked,
+  retweeted,
+  id,
+  displayName,
+  username,
+  picture,
+  content,
+  comments,
+  likes,
+  retweets,
+  date,
+  image,
+}) => {
   const timeago = useTimeAgo(date)
   const formatDate = useDateFormat(date)
   const [showDate, setShowDate] = useState(false)
@@ -125,6 +138,8 @@ const Tweet = ({ liked, id, displayName, username, picture, content, comments, l
   const handleMouseLeave = () => {
     setShowDate(false)
   }
+
+  // TweetContainer onClick={handleArticleClick}
 
   const handleArticleClick = e => {
     e.preventDefault()
@@ -146,7 +161,7 @@ const Tweet = ({ liked, id, displayName, username, picture, content, comments, l
   }
 
   return (
-    <TweetContainer onClick={handleArticleClick}>
+    <TweetContainer>
       <PictureContainer>
         <Picture src={picture} />
       </PictureContainer>
@@ -170,11 +185,11 @@ const Tweet = ({ liked, id, displayName, username, picture, content, comments, l
         <Interaction>
           <InteractionIcon>
             <CommentIcon />
-            <Numbers>{comments.length}</Numbers>
+            <Numbers>{!(comments.length === 0) && comments.length}</Numbers>
           </InteractionIcon>
           <InteractionIcon>
-            <RetweetIcon />
-            <Numbers>{retweets.length}</Numbers>
+            <RetweetIcon fill={retweeted ? '#17bf63' : '#8899a6'} />
+            <Numbers style={{ color: '#17bf63' }}>{!(retweets.length === 0) && retweets.length}</Numbers>
           </InteractionIcon>
           <InteractionIcon>
             {liked ? (
@@ -182,7 +197,7 @@ const Tweet = ({ liked, id, displayName, username, picture, content, comments, l
             ) : (
               <LikeIcon fill="#8899a6" stroke="none" onClick={handleLike} />
             )}
-            <Numbers>{likes.length}</Numbers>
+            <Numbers style={{ color: '#e0245e' }}>{!(likes.length === 0) && likes.length}</Numbers>
           </InteractionIcon>
           <span>
             <ShareIcon />

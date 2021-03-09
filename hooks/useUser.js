@@ -5,7 +5,7 @@ import { onAuthStateChanged } from 'firebase/client'
 const useUser = () => {
   const { user, setUser } = useContext(authContext)
   useEffect(() => {
-    onAuthStateChanged(user => setUser(user))
+    onAuthStateChanged(setUser)
   }, [])
   return user
 }

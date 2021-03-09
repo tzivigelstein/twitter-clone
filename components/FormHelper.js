@@ -10,7 +10,7 @@ const HelperContainer = styled.div`
   max-width: 260px;
 
   span {
-    color: #1da0f2;
+    color: #1da1f2;
     font-size: 15px;
     cursor: pointer;
     &:not(:first-of-type):not(:last-child) {

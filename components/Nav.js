@@ -30,22 +30,22 @@ const Nav = ({ layoutConfig }) => {
     <NavContainer>
       <Link href="/home">
         <IconContainer>
-          <HomeIcon fill={home ? '#1da1f2' : '#8899a6'} width={26} height />
+          <HomeIcon fill={home ? '#1da1f2' : '#8899a6'} width={26} />
         </IconContainer>
       </Link>
       <Link href="/explore">
         <IconContainer>
-          <SearchIcon fill={explore ? '#1da1f2' : '#8899a6'} width={26} height />
+          <SearchIcon fill={explore ? '#1da1f2' : '#8899a6'} width={26} />
         </IconContainer>
       </Link>
       <Link href="/notifications">
         <IconContainer>
-          <BellIcon fill={notifications ? '#1da1f2' : '#8899a6'} width={26} height />
+          <BellIcon fill={notifications ? '#1da1f2' : '#8899a6'} width={26} />
         </IconContainer>
       </Link>
       <Link href="messages">
         <IconContainer>
-          <MailIcon fill={directs ? '#1da1f2' : '#8899a6'} width={26} height />
+          <MailIcon fill={directs ? '#1da1f2' : '#8899a6'} width={26} />
         </IconContainer>
       </Link>
     </NavContainer>

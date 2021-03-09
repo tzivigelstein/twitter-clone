@@ -53,7 +53,7 @@ const Index = () => {
         className={styles.textarea}
         style={
           drag === DRAG_IMAGE_STATES.DRAG_OVER
-            ? { borderRadius: '6px', border: '3px dashed #1da0f2', margin: '-3px' }
+            ? { borderRadius: '6px', border: '3px dashed #1da1f2', margin: '-3px' }
             : {}
         }
         onDragEnter={handleDragEnter}

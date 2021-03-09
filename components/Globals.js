@@ -86,7 +86,7 @@ export const Button = styled.button`
   font-size: 15px;
   font-weight: 700;
   color: #fff;
-  background-color: #1da0f2;
+  background-color: #1da1f2;
 
   &:disabled {
     opacity: 0.5;

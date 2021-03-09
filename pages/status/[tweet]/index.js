@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from 'pages/status/[tweet]/styles.module.css'
-import { ArrowLeftIcon, CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
+import { ArrowLeftIcon, CommentIcon, FilledLikeIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
 import Link from 'next/link'
 import { firestore } from 'firebase/admin'
 import { useRouter } from 'next/router'
@@ -14,6 +14,7 @@ export default function TweetPage(props) {
   const { avatar, comments, likes, retweets, content, displayName, image, createdAt } = props
 
   const formatDate = useDateFormat(createdAt * 1000)
+
 
   return (
     <>
@@ -52,34 +53,47 @@ export default function TweetPage(props) {
         <div className={styles.dateInfo}>
           <span className={styles.date}>{formatDate}</span>
         </div>
-        <div className={styles.interactionInfo}>
-          <div className={styles.interactionBorder}>
-            <span>
-              {comments.length}
-              <span className={styles.lightText}> Retweets</span>
-            </span>
-            <span>
-              {retweets.length}
-              <span className={styles.lightText}> Comments</span>
-            </span>
-            <span>
-              {likes.length}
-              <span className={styles.lightText}> Likes</span>
-            </span>
+        {!(likes.length === 0 && comments.length === 0 && retweets.length === 0) && (
+          <div className={styles.interactionInfo}>
+            <div className={styles.interactionBorder}>
+              {!(retweets.length === 0) && (
+                <span className={styles.interactionData}>
+                  {retweets.length}{' '}
+                  <span className={styles.lightText}> {retweets.length > 1 ? 'Retweets' : 'Retweet'}</span>
+                </span>
+              )}
+
+              {!(comments.length === 0) && (
+                <span className={styles.interactionData}>
+                  {comments.length}{' '}
+                  <span className={styles.lightText}> {comments.length > 1 ? 'Comments' : 'Comment'}</span>
+                </span>
+              )}
+
+              {!(likes.length === 0) && (
+                <span className={styles.interactionData}>
+                  {likes.length} <span className={styles.lightText}> {likes.length > 1 ? 'Likes' : 'Like'}</span>
+                </span>
+              )}
+            </div>
           </div>
-        </div>
+        )}
         <div className={styles.interactionContainer}>
           <span className={styles.interactionIcon}>
-            <CommentIcon />
+            <CommentIcon width={22.5} height={22.5} />
           </span>
           <span className={styles.interactionIcon}>
-            <RetweetIcon />
+            <RetweetIcon width={22.5} height={22.5} />
           </span>
           <span className={styles.interactionIcon}>
-            <LikeIcon />
+            {id !== null && likes.includes(user.uid) ? (
+              <FilledLikeIcon width={22.5} height={22.5} />
+            ) : (
+              <LikeIcon width={22.5} height={22.5} fill="#8899a6" stroke="none" />
+            )}
           </span>
           <span>
-            <ShareIcon />
+            <ShareIcon width={22.5} height={22.5} />
           </span>
         </div>
         <div className="comments">
@@ -114,7 +128,7 @@ export async function getStaticProps(context) {
         id,
         createdAt: data.createdAt._seconds,
       }
-      return { props: props }
+      return { props }
     })
     .catch(error => {
       console.log(error)

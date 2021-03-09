@@ -4,7 +4,7 @@ const Spinner1 = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border: 0.3rem solid #1da0f2;
+  border: 0.3rem solid #1da1f2;
   border-right: 0.3rem solid transparent;
   animation: 1.5s infinite linear spin-1;
   z-index: 1;

@@ -22,7 +22,7 @@ const Helper = styled.p`
 
 const Refresh = styled.div`
   border-radius: 60px;
-  background: #1da0f2;
+  background: #1da1f2;
   width: 118px;
   padding: 0.5rem 0;
   margin: 0 auto;

@@ -26,7 +26,7 @@ const Back = styled.div`
 `
 
 const Tweet = styled.button`
-  background-color: #1da0f2;
+  background-color: #1da1f2;
   padding: 0.4rem 1rem;
   border-radius: 60px;
   border: none;

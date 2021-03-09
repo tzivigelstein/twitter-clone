@@ -11,7 +11,6 @@ export const formatDate = timestamp => {
       month: 'short',
       day: 'numeric',
     }
-
     return date.toLocaleDateString(lang, OPTIONS)
   }
 
@@ -21,7 +20,6 @@ export const formatDate = timestamp => {
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric',
-    second: 'numeric',
   }
 
   return new Intl.DateTimeFormat(lang, OPTIONS).format(date)
