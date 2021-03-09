@@ -8,7 +8,7 @@ import { AvatarPlaceholder } from 'components/onLoadAnimations/onLoadAnimations'
 import useUser from 'hooks/useUser'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
-import TextArea from 'components/TextArea'
+import TextArea from 'components/TextArea/TextArea'
 import styles from 'pages/compose/tweet/styles.module.css'
 
 const Header = styled.div`
