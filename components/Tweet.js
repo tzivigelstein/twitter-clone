@@ -189,7 +189,7 @@ const Tweet = ({
           </InteractionIcon>
           <InteractionIcon>
             <RetweetIcon fill={retweeted ? '#17bf63' : '#8899a6'} />
-            <Numbers style={{ color: '#17bf63' }}>{!(retweets.length === 0) && retweets.length}</Numbers>
+            <Numbers style={liked ?{ color: '#17bf63' }: {color: "#8899a6"}}>{!(retweets.length === 0) && retweets.length}</Numbers>
           </InteractionIcon>
           <InteractionIcon>
             {liked ? (
@@ -197,7 +197,7 @@ const Tweet = ({
             ) : (
               <LikeIcon fill="#8899a6" stroke="none" onClick={handleLike} />
             )}
-            <Numbers style={{ color: '#e0245e' }}>{!(likes.length === 0) && likes.length}</Numbers>
+            <Numbers style={liked ? { color: '#e0245e' } : {color: "#8899a6"}}>{!(likes.length === 0) && likes.length}</Numbers>
           </InteractionIcon>
           <span>
             <ShareIcon />
