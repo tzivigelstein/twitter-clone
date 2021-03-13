@@ -6,7 +6,6 @@ const Spinner = ({ width, firstColor, secondColor }) => {
     height: ${width};
     position: relative;
     margin: 0 auto;
-    z-index: 3;
   `
 
   const Spinner1 = styled.div`
