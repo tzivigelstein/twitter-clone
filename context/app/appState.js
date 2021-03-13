@@ -130,9 +130,6 @@ const AppState = ({ children }) => {
     }
 
     try {
-      dispatch({
-        type: LOADING,
-      })
       await db
         .collection('tweets')
         .doc(tweetId)
