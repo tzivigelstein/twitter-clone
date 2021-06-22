@@ -51,25 +51,22 @@ const Index = () => {
           <>
             {tweets ? (
               <Container>
-                {tweets.map(tweet => {
-                  console.log(tweet.content, tweet.likes.includes(user.uid))
-                  return (
-                    <Tweet
-                      liked={tweet.likes.includes(user.uid)}
-                      key={tweet.id}
-                      id={tweet.id}
-                      displayName={tweet.displayName}
-                      image={tweet.image ? tweet.image : ''}
-                      // username={tweet.username}
-                      picture={tweet.avatar}
-                      content={tweet.content}
-                      comments={tweet.comments}
-                      likes={tweet.likes}
-                      retweets={tweet.retweets}
-                      date={tweet.createdAt.seconds * 1000}
-                    />
-                  )
-                })}
+                {tweets.map(tweet => (
+                  <Tweet
+                    liked={tweet.likes.includes(user.uid)}
+                    key={tweet.id}
+                    id={tweet.id}
+                    displayName={tweet.displayName}
+                    image={tweet.image ? tweet.image : ''}
+                    // username={tweet.username}
+                    picture={tweet.avatar}
+                    content={tweet.content}
+                    comments={tweet.comments}
+                    likes={tweet.likes}
+                    retweets={tweet.retweets}
+                    date={tweet.createdAt.seconds * 1000}
+                  />
+                ))}
               </Container>
             ) : (
               <>

@@ -37,7 +37,6 @@ const LoginForm = () => {
 
   const handleClick = e => {
     e.preventDefault()
-    console.log(data)
   }
 
   const handleFocus = e => {
