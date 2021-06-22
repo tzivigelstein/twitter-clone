@@ -179,7 +179,7 @@ const Tweet = ({
       <ContentContainer>
         <div style={{ position: 'relative' }}>
           <User>{displayName}</User>
-          <Username>{username}</Username>
+          {/* <Username>{username}</Username> */}
           <Link href={`/status/${id}`}>
             <Time onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} dateTime={formatDate}>
               {timeago}

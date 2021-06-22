@@ -58,7 +58,7 @@ const Index = () => {
                     id={tweet.id}
                     displayName={tweet.displayName}
                     image={tweet.image ? tweet.image : ''}
-                    // username={tweet.username}
+                    username={tweet.username}
                     picture={tweet.avatar}
                     content={tweet.content}
                     comments={tweet.comments}
