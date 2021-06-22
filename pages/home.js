@@ -52,6 +52,7 @@ const Index = () => {
             {tweets ? (
               <Container>
                 {tweets.map(tweet => {
+                  console.log(tweet.content, tweet.likes.includes(user.uid))
                   return (
                     <Tweet
                       liked={tweet.likes.includes(user.uid)}

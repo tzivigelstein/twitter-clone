@@ -40,7 +40,6 @@ const AppState = ({ children }) => {
     return db
       .collection('tweets')
       .orderBy('createdAt', 'desc')
-      .limit(20)
       .onSnapshot(({ docs }) => {
         const newTweets = docs.map(mapTweetsToObject)
         callback(newTweets)
@@ -172,8 +171,6 @@ const AppState = ({ children }) => {
       payload: image,
     })
   }
-
-  
 
   return (
     <appContext.Provider

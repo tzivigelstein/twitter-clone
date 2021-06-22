@@ -38,12 +38,12 @@ const Nav = ({ layoutConfig }) => {
           <SearchIcon fill={explore ? '#1da1f2' : '#8899a6'} width={26} />
         </IconContainer>
       </Link>
-      <Link href="/notifications">
+      <Link href="/">
         <IconContainer>
           <BellIcon fill={notifications ? '#1da1f2' : '#8899a6'} width={26} />
         </IconContainer>
       </Link>
-      <Link href="messages">
+      <Link href="/">
         <IconContainer>
           <MailIcon fill={directs ? '#1da1f2' : '#8899a6'} width={26} />
         </IconContainer>

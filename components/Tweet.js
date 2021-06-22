@@ -7,6 +7,8 @@ import useTimeAgo from 'hooks/useTimeAgo'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
+import Highlight from 'react-hashtag'
+import hash from 'string-hash'
 
 const TweetContainer = styled.article`
   border-bottom: 1px solid rgb(56, 68, 77);
@@ -109,6 +111,15 @@ const Numbers = styled.span`
   margin-left: 0.4rem;
 `
 
+const Hashtag = styled.span`
+  color: #1b95e0;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 const Tweet = ({
   liked,
   retweeted,
@@ -176,7 +187,11 @@ const Tweet = ({
           </Link>
           {showDate && <Tooltip>{formatDate}</Tooltip>}
         </div>
-        <Content>{content}</Content>
+        <Content>
+          <Highlight renderHashtag={hashtagValue => <Hashtag key={hash(hashtagValue)}>{hashtagValue}</Hashtag>}>
+            {content}
+          </Highlight>
+        </Content>
         {image && (
           <ImageContainer>
             <Image src={image} />
@@ -197,7 +212,9 @@ const Tweet = ({
             ) : (
               <LikeIcon fill="#8899a6" stroke="none" onClick={handleLike} />
             )}
-            <Numbers style={{ color: '#e0245e' }}>{!(likes.length === 0) && likes.length}</Numbers>
+            <Numbers style={liked ? { color: '#e0245e' } : { color: '#8899a6' }}>
+              {likes.length !== 0 && likes.length}
+            </Numbers>
           </InteractionIcon>
           <span>
             <ShareIcon />
