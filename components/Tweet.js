@@ -204,7 +204,7 @@ const Tweet = ({
           </InteractionIcon>
           <InteractionIcon>
             <RetweetIcon fill={retweeted ? '#17bf63' : '#8899a6'} />
-            <Numbers style={{ color: '#17bf63' }}>{!(retweets.length === 0) && retweets.length}</Numbers>
+            <Numbers style={liked ?{ color: '#17bf63' }: {color: "#8899a6"}}>{!(retweets.length === 0) && retweets.length}</Numbers>
           </InteractionIcon>
           <InteractionIcon>
             {liked ? (

@@ -118,9 +118,6 @@ const AppState = ({ children }) => {
     const { tweetId, userId, likes } = data
     if (likes.includes(userId)) {
       try {
-        dispatch({
-          type: LOADING,
-        })
         await db
           .collection('tweets')
           .doc(tweetId)
@@ -132,9 +129,6 @@ const AppState = ({ children }) => {
     }
 
     try {
-      dispatch({
-        type: LOADING,
-      })
       await db
         .collection('tweets')
         .doc(tweetId)

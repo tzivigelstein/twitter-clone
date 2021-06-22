@@ -33,10 +33,13 @@ const Tweet = styled.button`
   outline: none;
   margin-right: 1rem;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
+
   &:disabled {
     background-color: #1da1f2;
     opacity: 0.5;
   }
+
   p {
     color: #fff;
     font-weight: bold;
@@ -84,6 +87,7 @@ const Index = () => {
   const user = useUser()
 
   useEffect(() => {
+    console.log(loading)
     !user && router.replace('/login')
   }, [])
 
@@ -107,7 +111,7 @@ const Index = () => {
             </Back>
           </Link>
           <Tweet onClick={handleClick} disabled={area === null || area === '' || loading}>
-            {loading ? <Spinner width="1rem" /> : <p>Tweet</p>}
+            {loading ? <Spinner firstColor="#eee" width="1rem" /> : <p>Tweet</p>}
           </Tweet>
         </Header>
         <NewTweeetContainer>
