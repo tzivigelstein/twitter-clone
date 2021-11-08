@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './Header.module.css'
 import styled from '@emotion/styled'
 import authContext from 'context/auth/authContext'
