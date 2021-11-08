@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styles from 'pages/status/[tweet]/styles.module.css'
-import { ArrowLeftIcon, CommentIcon, FilledLikeIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
+import { ArrowLeftIcon, CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
 import Link from 'next/link'
 import { firestore } from 'firebase/admin'
 import { useRouter } from 'next/router'
