@@ -1,3 +1,4 @@
+import { useContext, useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { CommentIcon, FilledLikeIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
 import appContext from 'context/app/appContext'
@@ -6,7 +7,6 @@ import useDateFormat from 'hooks/useDateFormat'
 import useTimeAgo from 'hooks/useTimeAgo'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
 import Highlight from 'react-hashtag'
 import hash from 'string-hash'
 
@@ -44,6 +44,11 @@ const Content = styled.span`
   font-size: 14px;
 `
 
+const TweetHeading = styled.div`
+  position: relative;
+  display: flex;
+`
+
 const ImageContainer = styled.div`
   display: flex;
   margin: 0.8rem 0;
@@ -60,23 +65,19 @@ const Image = styled.img`
 const User = styled.span`
   font-size: 14px;
   font-weight: bold;
+  white-space: nowrap;
   &:active {
     text-decoration: underline;
     cursor: pointer;
   }
 `
 
-const Username = styled.span`
-  font-size: 14px;
-  color: #8899a6;
-  margin: 0 0.4rem;
-`
-
 const Time = styled.time`
   font-size: 14px;
   color: #8899a6;
-  margin: 0 0.4rem;
-
+  margin-right: 0.4rem;
+  margin-left: auto;
+  white-space: nowrap;
   &:active {
     text-decoration: underline;
     cursor: pointer;
@@ -121,11 +122,11 @@ const Hashtag = styled.span`
 `
 
 const Tweet = ({
+  username,
   liked,
   retweeted,
   id,
   displayName,
-  username,
   picture,
   content,
   comments,
@@ -134,6 +135,41 @@ const Tweet = ({
   date,
   image,
 }) => {
+  const [windowWidth, setWindowWidth] = useState(window && window.innerWidth)
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [window.width])
+
+  function handleResize() {
+    setWindowWidth(window.innerWidth)
+  }
+
+  const exampleName = '@tzivigelstein'
+  const exampleNameLength = exampleName.length
+  let exampleUsernameLength = 12
+
+  if (windowWidth <= 360) {
+    exampleUsernameLength = 8
+  } else if (windowWidth <= 380) {
+    exampleUsernameLength = 10
+  } else {
+    exampleUsernameLength = 15
+  }
+
+  const resultantUsernameLength = Math.floor((exampleNameLength * exampleUsernameLength) / username.length)
+
+  const Username = styled.span`
+    font-size: 14px;
+    overflow: hidden;
+    color: #8899a6;
+    margin: 0 0.4rem;
+    text-overflow: ellipsis;
+    max-width: ${resultantUsernameLength}ch;
+  `
+
   const timeago = useTimeAgo(date)
   const formatDate = useDateFormat(date)
   const [showDate, setShowDate] = useState(false)
@@ -150,8 +186,6 @@ const Tweet = ({
     setShowDate(false)
   }
 
-  // TweetContainer onClick={handleArticleClick}
-
   const handleArticleClick = e => {
     e.preventDefault()
     router.push(`/status/${id}`)
@@ -164,11 +198,11 @@ const Tweet = ({
       likes,
     }
     like(data)
-    if (!e) {
-      var e = window.event
+
+    if (e) {
+      e.cancelBubble = true
+      if (e.stopPropagation) e.stopPropagation()
     }
-    e.cancelBubble = true
-    if (e.stopPropagation) e.stopPropagation()
   }
 
   return (
@@ -177,16 +211,16 @@ const Tweet = ({
         <Picture src={picture} />
       </PictureContainer>
       <ContentContainer>
-        <div style={{ position: 'relative' }}>
+        <TweetHeading>
           <User>{displayName}</User>
-          {/* <Username>{username}</Username> */}
+          <Username>{`@${username}`}</Username>
           <Link href={`/status/${id}`}>
             <Time onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} dateTime={formatDate}>
               {timeago}
             </Time>
           </Link>
           {showDate && <Tooltip>{formatDate}</Tooltip>}
-        </div>
+        </TweetHeading>
         <Content>
           <Highlight renderHashtag={hashtagValue => <Hashtag key={hash(hashtagValue)}>{hashtagValue}</Hashtag>}>
             {content}
@@ -204,7 +238,9 @@ const Tweet = ({
           </InteractionIcon>
           <InteractionIcon>
             <RetweetIcon fill={retweeted ? '#17bf63' : '#8899a6'} />
-            <Numbers style={liked ?{ color: '#17bf63' }: {color: "#8899a6"}}>{!(retweets.length === 0) && retweets.length}</Numbers>
+            <Numbers style={liked ? { color: '#17bf63' } : { color: '#8899a6' }}>
+              {!(retweets.length === 0) && retweets.length}
+            </Numbers>
           </InteractionIcon>
           <InteractionIcon>
             {liked ? (
