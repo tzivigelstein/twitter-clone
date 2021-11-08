@@ -93,7 +93,17 @@ const Index = () => {
   const handleClick = e => {
     e.preventDefault()
     if (area.length > 140 || !area.trim()) return
-    const data = { avatar: user.photoURL, content: area, userId: user.uid, displayName: user.displayName, image: image }
+
+    const username = user.displayName.toLowerCase().split(' ').join('')
+
+    const data = {
+      avatar: user.photoURL,
+      content: area,
+      userId: user.uid,
+      displayName: user.displayName,
+      image: image,
+      username,
+    }
     postTweet(data)
   }
 
