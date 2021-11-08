@@ -156,7 +156,7 @@ const Tweet = ({
   } else if (windowWidth <= 380) {
     exampleUsernameLength = 10
   } else {
-    exampleUsernameLength = 15
+    exampleUsernameLength = 12
   }
 
   const resultantUsernameLength = Math.floor((exampleNameLength * exampleUsernameLength) / username.length)
