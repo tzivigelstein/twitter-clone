@@ -4,6 +4,8 @@ import appContext from 'context/app/appContext'
 import { DRAG_IMAGE_STATES } from 'types'
 import { uploadImage } from 'firebase/client'
 
+const dragOverStyles = { borderRadius: '6px', border: '3px dashed #1da1f2', margin: '-3px' }
+
 const Index = () => {
   const { task, tweetContent, captureTweetContent, MAX_CHAR, drag, setDrag, setChar, setImage, setTask } = useContext(
     appContext
@@ -51,11 +53,7 @@ const Index = () => {
     <div style={{ width: '100%' }}>
       <textarea
         className={styles.textarea}
-        style={
-          drag === DRAG_IMAGE_STATES.DRAG_OVER
-            ? { borderRadius: '6px', border: '3px dashed #1da1f2', margin: '-3px' }
-            : {}
-        }
+        style={drag === DRAG_IMAGE_STATES.DRAG_OVER ? dragOverStyles : {}}
         onDragEnter={handleDragEnter}
         onDragLeave={handleOnDragLeave}
         onDrop={handleOnDrop}
