@@ -87,7 +87,6 @@ const Index = () => {
   const user = useUser()
 
   useEffect(() => {
-    console.log(loading)
     !user && router.replace('/login')
   }, [])
 
