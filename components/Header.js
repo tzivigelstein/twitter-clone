@@ -58,7 +58,7 @@ const Input = styled.input`
   }
 `
 const Header = ({ layoutConfig }) => {
-  const { home, explore, notifications, directs } = layoutConfig
+  const { home, explore } = layoutConfig
   const { user } = useContext(authContext)
 
   const [focus, setFocus] = useState(false)
