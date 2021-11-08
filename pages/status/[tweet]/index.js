@@ -103,7 +103,7 @@ export default function TweetPage(props) {
 
 export async function getStaticPaths() {
   return {
-    paths: [{ params: { tweet: 'fZ4lUKJZjo10gnW9h7WD' } }],
+    paths: [{ params: { tweet: 'wb5t0mNysDTC2XXim9hj' } }],
     fallback: true,
   }
 }
