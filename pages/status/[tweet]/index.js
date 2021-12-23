@@ -49,8 +49,6 @@ export default function TweetPage(props) {
     }
   }
 
-  console.log({ liked })
-
   return (
     <>
       <Head>
@@ -171,7 +169,6 @@ export async function getStaticProps(context) {
     .then(doc => {
       const data = doc.data()
       const id = doc.id
-      console.log({ data })
       const props = {
         ...data,
         id,
@@ -181,7 +178,7 @@ export async function getStaticProps(context) {
       return { props }
     })
     .catch(error => {
-      console.log(error)
+      console.error(error)
       return { props: {} }
     })
 }

@@ -74,8 +74,8 @@ const AppState = ({ children }) => {
         })
         return res
       })
-      .catch(err => {
-        console.log(err)
+      .catch(error => {
+        console.error(error)
         dispatch({
           type: GET_TWEETS_ERROR,
         })
@@ -109,7 +109,7 @@ const AppState = ({ children }) => {
       dispatch({
         type: POST_TWEETS_ERROR,
       })
-      console.log(error)
+      console.error(error)
     }
     router.replace('/')
   }
@@ -123,7 +123,7 @@ const AppState = ({ children }) => {
           .doc(tweetId)
           .update({ likes: likes.filter(like => like !== userId) })
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
       return
     }
@@ -134,7 +134,7 @@ const AppState = ({ children }) => {
         .doc(tweetId)
         .update({ likes: [...likes, userId] })
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 

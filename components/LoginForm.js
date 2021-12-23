@@ -65,7 +65,7 @@ const LoginForm = () => {
       await loginWithGoogle()
       router.push('/home')
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 
