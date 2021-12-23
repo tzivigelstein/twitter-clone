@@ -1,19 +1,55 @@
+import { useContext } from 'react'
+import appContext from 'context/app/appContext'
 import Head from 'next/head'
 import styles from 'pages/status/[tweet]/styles.module.css'
-import { ArrowLeftIcon, CommentIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
+import { ArrowLeftIcon, CommentIcon, FilledLikeIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
 import Link from 'next/link'
 import { firestore } from 'firebase/admin'
 import { useRouter } from 'next/router'
 import useDateFormat from 'hooks/useDateFormat'
+import Highlight from 'react-hashtag'
+import hash from 'string-hash'
 
 export default function TweetPage(props) {
   const router = useRouter()
 
+  const { like } = useContext(appContext)
+
   if (router.isFallback) return <h1>Loading...</h1>
 
-  const { avatar, comments, likes, retweets, content, displayName, image, createdAt } = props
+  const {
+    id,
+    userId,
+    avatar,
+    comments,
+    likes,
+    liked,
+    retweets,
+    content,
+    displayName,
+    username,
+    image,
+    createdAt,
+  } = props
 
   const formatDate = useDateFormat(createdAt * 1000)
+
+  const handleLike = e => {
+    const data = {
+      tweetId: id,
+      userId,
+      likes,
+    }
+
+    like(data)
+
+    if (e) {
+      e.cancelBubble = true
+      if (e.stopPropagation) e.stopPropagation()
+    }
+  }
+
+  console.log({ liked })
 
   return (
     <>
@@ -41,11 +77,21 @@ export default function TweetPage(props) {
             </div>
             <div className={styles.userInfo}>
               <p className={styles.user}>{displayName}</p>
-              <p className={styles.username}></p>
+              <p className={styles.username}>{`@${username}`}</p>
             </div>
           </div>
           <div className={styles.contentContainer}>
-            <div className={styles.content}>{content}</div>
+            <p className={styles.content}>
+              <Highlight
+                renderHashtag={hashtagValue => (
+                  <span className={styles.hashtag} key={hash(hashtagValue)}>
+                    {hashtagValue}
+                  </span>
+                )}
+              >
+                {content}
+              </Highlight>
+            </p>
             {image && <img className={styles.image} src={image} />}
           </div>
         </div>
@@ -85,7 +131,14 @@ export default function TweetPage(props) {
             <RetweetIcon width={22.5} height={22.5} />
           </span>
           <span className={styles.interactionIcon}>
-            <LikeIcon width={22.5} height={22.5} fill="#8899a6" stroke="none" />
+            {liked ? (
+              <FilledLikeIcon width={22.5} height={22.5} onClick={handleLike} />
+            ) : (
+              <LikeIcon width={22.5} height={22.5} fill="#8899a6" stroke="none" onClick={handleLike} />
+            )}
+            <span className={styles.numbers} style={liked ? { color: '#e0245e' } : { color: '#8899a6' }}>
+              {likes.length !== 0 && likes.length}
+            </span>
           </span>
           <span>
             <ShareIcon width={22.5} height={22.5} />
@@ -118,10 +171,12 @@ export async function getStaticProps(context) {
     .then(doc => {
       const data = doc.data()
       const id = doc.id
+      console.log({ data })
       const props = {
         ...data,
         id,
         createdAt: data.createdAt._seconds,
+        liked: data.likes.includes(data.userId),
       }
       return { props }
     })
