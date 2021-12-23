@@ -67,6 +67,19 @@
 
 .content {
   font-size: 23px;
+  margin-top: 0;
+  margin-bottom: 0.6rem;
+}
+
+.hashtag {
+  color: #1b95e0;
+  cursor: pointer;
+}
+
+@media (hover) {
+  .hashtag:hover {
+    text-decoration: underline;
+  }
 }
 
 .image {
@@ -117,4 +130,10 @@
 
 .interactionData {
   margin: 0 0.6rem;
+}
+
+.numbers {
+  font-size: 1rem;
+  color: #8899a6;
+  margin-left: 0.4rem;
 }
