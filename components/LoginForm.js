@@ -116,9 +116,6 @@ const LoginForm = () => {
         <LoginGoogle onClick={handleLoginGoogle}>
           <img src="/resources/google.png" alt="" /> <span>Login with Google</span>
         </LoginGoogle>
-        <LoginGithub>
-          <img src="/resources/github.png" alt="" /> <span>Login with Github</span>
-        </LoginGithub>
       </ExternalLogin>
     </FormContainer>
   )

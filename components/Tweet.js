@@ -10,6 +10,12 @@ import { useRouter } from 'next/router'
 import Highlight from 'react-hashtag'
 import hash from 'string-hash'
 
+const TweetLink = styled(Link)`
+  &:hover {
+    cursor: pointer;
+  }
+`
+
 const TweetContainer = styled.article`
   border-bottom: 1px solid rgb(56, 68, 77);
   width: 100%;
@@ -186,9 +192,9 @@ const Tweet = ({
     setShowDate(false)
   }
 
-  const handleArticleClick = e => {
+  const handleTweetClick = e => {
     e.preventDefault()
-    router.push(`/status/${id}`)
+    router.push()
   }
 
   const handleLike = e => {
@@ -197,6 +203,7 @@ const Tweet = ({
       userId: user.uid,
       likes,
     }
+
     like(data)
 
     if (e) {
@@ -206,58 +213,60 @@ const Tweet = ({
   }
 
   return (
-    <TweetContainer>
-      <PictureContainer>
-        <Picture src={picture} />
-      </PictureContainer>
-      <ContentContainer>
-        <TweetHeading>
-          <User>{displayName}</User>
-          <Username>{`@${username}`}</Username>
-          <Link href={`/status/${id}`}>
-            <Time onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} dateTime={formatDate}>
-              {timeago}
-            </Time>
-          </Link>
-          {showDate && <Tooltip>{formatDate}</Tooltip>}
-        </TweetHeading>
-        <Content>
-          <Highlight renderHashtag={hashtagValue => <Hashtag key={hash(hashtagValue)}>{hashtagValue}</Hashtag>}>
-            {content}
-          </Highlight>
-        </Content>
-        {image && (
-          <ImageContainer>
-            <Image src={image} />
-          </ImageContainer>
-        )}
-        <Interaction>
-          <InteractionIcon>
-            <CommentIcon />
-            <Numbers>{!(comments.length === 0) && comments.length}</Numbers>
-          </InteractionIcon>
-          <InteractionIcon>
-            <RetweetIcon fill={retweeted ? '#17bf63' : '#8899a6'} />
-            <Numbers style={liked ? { color: '#17bf63' } : { color: '#8899a6' }}>
-              {!(retweets.length === 0) && retweets.length}
-            </Numbers>
-          </InteractionIcon>
-          <InteractionIcon>
-            {liked ? (
-              <FilledLikeIcon onClick={handleLike} />
-            ) : (
-              <LikeIcon fill="#8899a6" stroke="none" onClick={handleLike} />
-            )}
-            <Numbers style={liked ? { color: '#e0245e' } : { color: '#8899a6' }}>
-              {likes.length !== 0 && likes.length}
-            </Numbers>
-          </InteractionIcon>
-          <span>
-            <ShareIcon />
-          </span>
-        </Interaction>
-      </ContentContainer>
-    </TweetContainer>
+    <TweetLink href={`/status/${id}`}>
+      <TweetContainer>
+        <PictureContainer>
+          <Picture src={picture} />
+        </PictureContainer>
+        <ContentContainer>
+          <TweetHeading>
+            <User>{displayName}</User>
+            <Username>{`@${username}`}</Username>
+            <Link href={`/status/${id}`}>
+              <Time onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} dateTime={formatDate}>
+                {timeago}
+              </Time>
+            </Link>
+            {showDate && <Tooltip>{formatDate}</Tooltip>}
+          </TweetHeading>
+          <Content>
+            <Highlight renderHashtag={hashtagValue => <Hashtag key={hash(hashtagValue)}>{hashtagValue}</Hashtag>}>
+              {content}
+            </Highlight>
+          </Content>
+          {image && (
+            <ImageContainer>
+              <Image src={image} />
+            </ImageContainer>
+          )}
+          <Interaction>
+            <InteractionIcon>
+              <CommentIcon />
+              <Numbers>{!(comments.length === 0) && comments.length}</Numbers>
+            </InteractionIcon>
+            <InteractionIcon>
+              <RetweetIcon fill={retweeted ? '#17bf63' : '#8899a6'} />
+              <Numbers style={liked ? { color: '#17bf63' } : { color: '#8899a6' }}>
+                {!(retweets.length === 0) && retweets.length}
+              </Numbers>
+            </InteractionIcon>
+            <InteractionIcon>
+              {liked ? (
+                <FilledLikeIcon onClick={handleLike} />
+              ) : (
+                <LikeIcon fill="#8899a6" stroke="none" onClick={handleLike} />
+              )}
+              <Numbers style={liked ? { color: '#e0245e' } : { color: '#8899a6' }}>
+                {likes.length !== 0 && likes.length}
+              </Numbers>
+            </InteractionIcon>
+            <span>
+              <ShareIcon />
+            </span>
+          </Interaction>
+        </ContentContainer>
+      </TweetContainer>
+    </TweetLink>
   )
 }
 
