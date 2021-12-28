@@ -9,9 +9,7 @@ import {
   Button,
   ExternalLogin,
   LoginGoogle,
-  LoginGithub,
 } from 'components/Globals'
-import styles from 'components/form.module.css'
 import authContext from 'context/auth/authContext'
 import FormHelper from 'components/FormHelper'
 import { loginWithGoogle } from 'firebase/client'
@@ -21,10 +19,6 @@ const LoginForm = () => {
   const router = useRouter()
 
   const { user } = useContext(authContext)
-  const [focus, setFocus] = useState({
-    username: false,
-    password: false,
-  })
 
   const [data, setData] = useState({
     username: '',
@@ -37,20 +31,6 @@ const LoginForm = () => {
 
   const handleClick = e => {
     e.preventDefault()
-  }
-
-  const handleFocus = e => {
-    setFocus({
-      ...focus,
-      [e.target.name]: true,
-    })
-  }
-
-  const handleBlur = () => {
-    setFocus({
-      username: false,
-      password: false,
-    })
   }
 
   const handleChange = e => {
@@ -73,14 +53,12 @@ const LoginForm = () => {
     <FormContainer>
       <Form>
         <InputContainer>
-          <Border className={focus.username ? `${styles.active_border}` : ''}>
-            <InputHelper className={focus.username ? `${styles.active_text}` : ''}>
+          <Border>
+            <InputHelper>
               <span>Phone, email, or username</span>
             </InputHelper>
             <Input
               onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
               name="username"
               id="username"
               type="text"
@@ -89,14 +67,12 @@ const LoginForm = () => {
           </Border>
         </InputContainer>
         <InputContainer>
-          <Border className={focus.password ? `${styles.active_border}` : ''}>
-            <InputHelper className={focus.password ? `${styles.active_text}` : ''}>
+          <Border>
+            <InputHelper>
               <span>Password</span>
             </InputHelper>
             <Input
               onChange={handleChange}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
               name="password"
               type="password"
               id="password"
