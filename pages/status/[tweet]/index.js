@@ -142,11 +142,6 @@ export default function TweetPage(props) {
             <ShareIcon width={22.5} height={22.5} />
           </span>
         </div>
-        <div className="comments">
-          <ul>
-            <li className="comment"></li>
-          </ul>
-        </div>
       </div>
     </>
   )
