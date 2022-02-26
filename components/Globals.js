@@ -57,12 +57,22 @@ export const InputContainer = styled.div`
 `
 
 export const Border = styled.div`
-  border: 1px solid #3d5466;
+  outline: 1px solid #3d5466;
   border-radius: 4px;
   min-height: 59px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+
+  &:focus-within {
+    outline: 2px solid #1da1f2;
+  }
+
+  &:focus-within ${InputHelper} {
+    span {
+      color: #1da1f2;
+    }
+  }
 `
 
 export const Input = styled.input`
