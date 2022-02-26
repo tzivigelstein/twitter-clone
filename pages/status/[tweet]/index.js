@@ -1,7 +1,7 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import appContext from 'context/app/appContext'
 import Head from 'next/head'
-import styles from 'pages/status/[tweet]/styles.module.css'
+import styles from './styles.module.css'
 import { ArrowLeftIcon, CommentIcon, FilledLikeIcon, LikeIcon, RetweetIcon, ShareIcon } from 'components/Icons'
 import Link from 'next/link'
 import { firestore } from 'firebase/admin'
@@ -9,39 +9,36 @@ import { useRouter } from 'next/router'
 import useDateFormat from 'hooks/useDateFormat'
 import Highlight from 'react-hashtag'
 import hash from 'string-hash'
+import useUser from 'hooks/useUser'
 
 export default function TweetPage(props) {
   const router = useRouter()
+  const { id, avatar, comments, likes, retweets, content, displayName, username, image, createdAt } = props
 
   const { like } = useContext(appContext)
+  const user = useUser()
+  const [liked, setLiked] = useState(false)
+
+  useEffect(() => {
+    if (likes !== undefined) {
+      setLiked(likes.includes(user?.uid))
+    }
+  }, [likes])
 
   if (router.isFallback) return <h1>Loading...</h1>
-
-  const {
-    id,
-    userId,
-    avatar,
-    comments,
-    likes,
-    liked,
-    retweets,
-    content,
-    displayName,
-    username,
-    image,
-    createdAt,
-  } = props
 
   const formatDate = useDateFormat(createdAt * 1000)
 
   const handleLike = e => {
     const data = {
       tweetId: id,
-      userId,
+      userId: user.uid,
       likes,
     }
 
     like(data)
+
+    setLiked(prev => !prev)
 
     if (e) {
       e.cancelBubble = true
@@ -134,9 +131,6 @@ export default function TweetPage(props) {
             ) : (
               <LikeIcon width={22.5} height={22.5} fill="#8899a6" stroke="none" onClick={handleLike} />
             )}
-            <span className={styles.numbers} style={liked ? { color: '#e0245e' } : { color: '#8899a6' }}>
-              {likes.length !== 0 && likes.length}
-            </span>
           </span>
           <span>
             <ShareIcon width={22.5} height={22.5} />
@@ -168,7 +162,6 @@ export async function getStaticProps(context) {
         ...data,
         id,
         createdAt: data.createdAt._seconds,
-        liked: data.likes.includes(data.userId),
       }
       return { props }
     })

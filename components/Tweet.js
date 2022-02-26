@@ -23,7 +23,6 @@ const TweetContainer = styled.article`
   display: flex;
   &:active {
     cursor: pointer;
-    backdrop-filter: brightness(120%);
   }
 `
 
@@ -190,11 +189,6 @@ const Tweet = ({
 
   const handleMouseLeave = () => {
     setShowDate(false)
-  }
-
-  const handleTweetClick = e => {
-    e.preventDefault()
-    router.push()
   }
 
   const handleLike = e => {
