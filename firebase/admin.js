@@ -7,4 +7,6 @@ const serviceAccount = require('./firebase-keys.json')
     credential: admin.credential.cert(serviceAccount),
   })
 
+export default admin
+
 export const firestore = admin.firestore()
