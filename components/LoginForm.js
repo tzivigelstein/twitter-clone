@@ -57,13 +57,7 @@ const LoginForm = () => {
             <InputHelper>
               <span>Phone, email, or username</span>
             </InputHelper>
-            <Input
-              onChange={handleChange}
-              name="username"
-              id="username"
-              type="text"
-              value={data.username}
-            />
+            <Input onChange={handleChange} name="username" id="username" type="text" value={data.username} />
           </Border>
         </InputContainer>
         <InputContainer>
@@ -71,13 +65,7 @@ const LoginForm = () => {
             <InputHelper>
               <span>Password</span>
             </InputHelper>
-            <Input
-              onChange={handleChange}
-              name="password"
-              type="password"
-              id="password"
-              value={data.password}
-            />
+            <Input onChange={handleChange} name="password" type="password" id="password" value={data.password} />
           </Border>
         </InputContainer>
         <Button
