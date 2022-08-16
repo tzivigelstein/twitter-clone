@@ -6,7 +6,6 @@ import authContext from 'context/auth/authContext'
 import useDateFormat from 'hooks/useDateFormat'
 import useTimeAgo from 'hooks/useTimeAgo'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import Highlight from 'react-hashtag'
 import hash from 'string-hash'
 
@@ -180,8 +179,6 @@ const Tweet = ({
   const [showDate, setShowDate] = useState(false)
   const { like } = useContext(appContext)
   const { user } = useContext(authContext)
-
-  const router = useRouter()
 
   const handleMouseEnter = () => {
     setShowDate(true)
