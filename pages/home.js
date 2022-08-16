@@ -9,6 +9,7 @@ import Spinner from 'components/Spinner/Spinner'
 import { useRouter } from 'next/router'
 import useUser from 'hooks/useUser'
 import Head from 'next/head'
+import { getTweetData } from 'helpers'
 
 const Index = () => {
   const { loading, listenLatestTweets } = useContext(appContext)
@@ -52,20 +53,7 @@ const Index = () => {
             {tweets ? (
               <Container>
                 {tweets.map(tweet => (
-                  <Tweet
-                    liked={tweet.likes.includes(user.uid)}
-                    key={tweet.id}
-                    id={tweet.id}
-                    displayName={tweet.displayName}
-                    image={tweet.image ? tweet.image : ''}
-                    username={tweet.username}
-                    picture={tweet.avatar}
-                    content={tweet.content}
-                    comments={tweet.comments}
-                    likes={tweet.likes}
-                    retweets={tweet.retweets}
-                    date={tweet.createdAt.seconds * 1000}
-                  />
+                  <Tweet key={tweet.id} tweet={getTweetData(tweet, user)} />
                 ))}
               </Container>
             ) : (

@@ -1,0 +1,10 @@
+.backButton {
+  background-color: transparent;
+  padding: 0.5rem 1rem 0.5rem 0;
+  border: none;
+}
+
+.userDisplayName {
+  font-size: 1rem;
+  margin-right: auto;
+}

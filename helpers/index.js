@@ -24,3 +24,19 @@ export const formatDate = timestamp => {
 
   return new Intl.DateTimeFormat(lang, OPTIONS).format(date)
 }
+
+export const getTweetData = (tweet, user) => {
+  return {
+    liked: tweet.likes.includes(user.uid),
+    id: tweet.id,
+    displayName: tweet.displayName,
+    image: tweet.image ? tweet.image : '',
+    username: tweet.username,
+    picture: tweet.avatar,
+    content: tweet.content,
+    comments: tweet.comments,
+    likes: tweet.likes,
+    retweets: tweet.retweets,
+    date: tweet.createdAt.seconds * 1000,
+  }
+}

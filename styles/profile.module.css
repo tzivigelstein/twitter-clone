@@ -1,5 +1,33 @@
 .cover {
   width: 100%;
   aspect-ratio: 194 / 65;
+  background-color: #000;
+  background-image: url('https://pbs.twimg.com/profile_banners/808381418053259264/1607444735/1080x360');
+  background-position: center;
+  background-size: cover;
+}
+
+.userPicture {
+  --picture-width: 85.5px;
+  width: var(--picture-width);
+  aspect-ratio: 1;
   background-color: #09f;
+  border-radius: 50%;
+  margin-top: calc((var(--picture-width) / 2) * -1);
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+}
+
+.container {
+  padding: 0 0 1rem 1rem;
+}
+
+.userDisplayName {
+  font-size: 19px;
+  font-weight: bold;
+}
+
+.userUsername {
+  font-size: 14px;
+  color: rgb(139, 152, 165);
 }
