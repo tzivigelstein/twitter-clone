@@ -67,9 +67,11 @@ export default function TweetPage(props) {
       <div className={styles.container}>
         <div className={styles.innerContainer}>
           <div className={styles.userInfoContainer}>
-            <div className={styles.avatarContainer}>
-              <img className={styles.avatar} src={avatar} alt="" />
-            </div>
+            <Link href={`/${username}`}>
+              <div className={styles.avatarContainer}>
+                <img className={styles.avatar} src={avatar} alt="" />
+              </div>
+            </Link>
             <div className={styles.userInfo}>
               <p className={styles.user}>{displayName}</p>
               <p className={styles.username}>{`@${username}`}</p>
@@ -155,13 +157,18 @@ export async function getStaticProps(context) {
     .collection('tweets')
     .doc(tweet)
     .get()
-    .then(doc => {
+    .then(async doc => {
       const data = doc.data()
       const id = doc.id
+
+      const username = (await firestore.collection('users').where('uid', '==', data.userId).get()).docs[0].data()
+        .username
+
       const props = {
         ...data,
         id,
         createdAt: data.createdAt._seconds,
+        username,
       }
       return { props }
     })
