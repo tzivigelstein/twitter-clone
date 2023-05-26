@@ -7,9 +7,8 @@ import { uploadImage } from 'firebase/client'
 const dragOverStyles = { borderRadius: '6px', border: '3px dashed #1da1f2', margin: '-3px' }
 
 const Index = () => {
-  const { task, tweetContent, captureTweetContent, MAX_CHAR, drag, setDrag, setChar, setImage, setTask } = useContext(
-    appContext
-  )
+  const { task, tweetContent, captureTweetContent, MAX_CHAR, drag, setDrag, setChar, setImage, setTask } =
+    useContext(appContext)
 
   useEffect(() => {
     if (task) {

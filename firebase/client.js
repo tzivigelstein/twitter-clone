@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import cookie from 'js-cookie'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyD1V9b6HQ20zdS94Gn0gd9CdGxUm5T4bgo',
@@ -14,20 +15,25 @@ const firebaseConfig = {
 
 export const db = firebase.firestore()
 
-const mapUserFromFirebaseAuth = data => {
-  const { displayName, email, photoURL, uid } = data
+export const mapUserFromFirebaseAuth = data => {
+  const { displayName, email, photoURL, uid, username } = data
   return {
     displayName,
     email,
     photoURL,
     uid,
+    username,
   }
 }
 
 export const onAuthStateChanged = onChange => {
-  return firebase.auth().onAuthStateChanged(user => {
-    const normalizedUser = user ? mapUserFromFirebaseAuth(user) : null
-    onChange(normalizedUser)
+  return firebase.auth().onAuthStateChanged(async user => {
+    if (user) {
+      const token = await user.getIdToken()
+      cookie.set('token', token, { expires: 14 })
+      const normalizedUser = user ? mapUserFromFirebaseAuth(user) : null
+      onChange(normalizedUser)
+    }
   })
 }
 

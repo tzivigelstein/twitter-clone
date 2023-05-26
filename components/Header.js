@@ -4,8 +4,9 @@ import styled from '@emotion/styled'
 import authContext from 'context/auth/authContext'
 import { AvatarPlaceholder } from 'components/onLoadAnimations/onLoadAnimations'
 import { SearchIcon, StarIcon } from 'components/Icons'
+import UserIcon from './UserIcon'
 
-const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,14 +15,9 @@ const HeaderContainer = styled.div`
   padding: 0 1rem;
   border-bottom: 1px solid rgb(61, 84, 102);
   background-color: rgb(21, 32, 43);
-  position: absolute;
+  position: sticky;
   top: 0;
   left: 0;
-`
-
-const UserIcon = styled.img`
-  width: 32px;
-  border-radius: 50%;
 `
 
 const Title = styled.span`
@@ -65,7 +61,7 @@ const Header = ({ layoutConfig }) => {
 
   return (
     <HeaderContainer>
-      {user ? <UserIcon src={user.photoURL} /> : <AvatarPlaceholder />}
+      {user ? <UserIcon user={user} /> : <AvatarPlaceholder />}
       {home && (
         <div>
           <Title>Home</Title>

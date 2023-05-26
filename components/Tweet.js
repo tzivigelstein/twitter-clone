@@ -125,31 +125,35 @@ const Hashtag = styled.span`
   }
 `
 
-const Tweet = ({
-  username,
-  liked,
-  retweeted,
-  id,
-  displayName,
-  picture,
-  content,
-  comments,
-  likes,
-  retweets,
-  date,
-  image,
-}) => {
-  const [windowWidth, setWindowWidth] = useState(window && window.innerWidth)
+const Tweet = ({ tweet }) => {
+  const {
+    username,
+    liked,
+    retweeted,
+    id,
+    displayName,
+    picture,
+    content,
+    comments,
+    likes,
+    retweets,
+    date,
+    image,
+  } = tweet
+
+  const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
+    setWindowWidth(window.innerWidth)
+
     window.addEventListener('resize', handleResize)
 
-    return () => window.removeEventListener('resize', handleResize)
-  }, [window.width])
+    function handleResize() {
+      setWindowWidth(window.innerWidth)
+    }
 
-  function handleResize() {
-    setWindowWidth(window.innerWidth)
-  }
+    return () => window.removeEventListener('resize', handleResize)
+  }, [typeof window !== 'undefined' && window.width])
 
   const exampleName = '@tzivigelstein'
   const exampleNameLength = exampleName.length
@@ -207,7 +211,9 @@ const Tweet = ({
     <TweetLink href={`/status/${id}`}>
       <TweetContainer>
         <PictureContainer>
-          <Picture src={picture} />
+          <Link href={`/${username}`}>
+            <Picture src={picture} />
+          </Link>
         </PictureContainer>
         <ContentContainer>
           <TweetHeading>

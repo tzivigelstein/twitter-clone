@@ -27,6 +27,7 @@ const AppState = ({ children }) => {
     MAX_CHAR: 140,
     tweets: null,
     loading: false,
+    error: null,
     msg: null,
     tweetContent: {
       area: '',
@@ -40,19 +41,27 @@ const AppState = ({ children }) => {
     return db
       .collection('tweets')
       .orderBy('createdAt', 'desc')
-      .onSnapshot(({ docs }) => {
-        const newTweets = docs.map(mapTweetsToObject)
+      .onSnapshot(async ({ docs }) => {
+        const newTweetsPromises = docs.map(mapTweetsToObject)
+        const newTweets = await Promise.all(newTweetsPromises)
+
         callback(newTweets)
       })
   }
 
-  const mapTweetsToObject = doc => {
+  const mapTweetsToObject = async doc => {
     const data = doc.data()
     const id = doc.id
+    const userId = data.userId
+
+    const userDoc = await db.collection('users').doc(userId).get()
+    const userData = userDoc.data()
+    const username = userData.username
 
     return {
       ...data,
       id,
+      username,
     }
   }
 
