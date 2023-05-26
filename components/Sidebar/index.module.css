@@ -1,0 +1,10 @@
+.container {
+  background-color: green;
+  height: 100%;
+}
+
+@media (max-width: 500px) {
+  .container {
+    display: none;
+  }
+}
