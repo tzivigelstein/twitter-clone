@@ -11,8 +11,8 @@ import useUser from 'hooks/useUser'
 import Head from 'next/head'
 import { getTweetData } from 'helpers'
 
-const Index = () => {
-  const { loading, listenLatestTweets } = useContext(appContext)
+export default function Home() {
+  const { loading, error, listenLatestTweets } = useContext(appContext)
 
   const router = useRouter()
 
@@ -58,17 +58,19 @@ const Index = () => {
               </Container>
             ) : (
               <>
-                {loading ? (
-                  <Container>
-                    <div
-                      style={{
-                        marginTop: '50%',
-                      }}
-                    >
-                      <Spinner width="2rem" />
-                    </div>
-                  </Container>
-                ) : (
+                {loading ||
+                  (!error && (
+                    <Container>
+                      <div
+                        style={{
+                          marginTop: '50%',
+                        }}
+                      >
+                        <Spinner width="2rem" />
+                      </div>
+                    </Container>
+                  ))}
+                {error && (
                   <Container>
                     <ConnectionLost />
                   </Container>
@@ -82,5 +84,3 @@ const Index = () => {
     </>
   )
 }
-
-export default Index
