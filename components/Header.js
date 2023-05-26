@@ -5,6 +5,7 @@ import authContext from 'context/auth/authContext'
 import { AvatarPlaceholder } from 'components/onLoadAnimations/onLoadAnimations'
 import { SearchIcon, StarIcon } from 'components/Icons'
 import UserIcon from './UserIcon'
+import Link from 'next/link'
 
 export const HeaderContainer = styled.div`
   display: flex;
@@ -61,7 +62,15 @@ const Header = ({ layoutConfig }) => {
 
   return (
     <HeaderContainer>
-      {user ? <UserIcon user={user} /> : <AvatarPlaceholder />}
+      {user ? (
+        <Link href={`/${user.username}`}>
+          <a>
+            <UserIcon user={user} />
+          </a>
+        </Link>
+      ) : (
+        <AvatarPlaceholder />
+      )}
       {home && (
         <div>
           <Title>Home</Title>
