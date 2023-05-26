@@ -14,6 +14,10 @@ const NavContainer = styled.div`
   height: 53px;
   background-color: rgb(21, 32, 43);
   border-top: 1px solid rgb(56, 68, 77);
+
+  @media (min-width: 501px) {
+    display: none;
+  }
 `
 
 const IconContainer = styled.div`
