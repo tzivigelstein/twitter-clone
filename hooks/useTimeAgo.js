@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { lang, isDateTimeFormatSupported, formatDate } from 'helpers'
 
 const DATE_UNITS = [
+  ['year', 604800 * 4 * 12],
   ['month', 604800 * 4],
   ['day', 86400],
   ['hour', 3600],
