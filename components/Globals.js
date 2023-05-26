@@ -1,35 +1,23 @@
 import styled from '@emotion/styled'
 
-export const ExternalContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const AppContainer = styled.div`
   width: 100%;
-  height: 100vh;
-`
-
-export const Mobile = styled.div`
-  width: 100%;
-  height: 100vh;
-  max-width: 414px;
-  max-height: 851px;
+  max-width: 1250px;
+  margin: 0 auto;
+  height: 100%;
   position: relative;
-  background-color: #15202b;
   overflow-y: hidden;
-  border-radius: 8px;
-
-  @media (max-width: 768px) {
-    max-width: none;
-    max-height: none;
-    border-radius: 0;
-  }
 `
 
 export const Container = styled.main`
   margin: 0;
   overflow-y: auto;
   height: 100%;
-  max-height: calc(100% - 103px);
+  max-height: calc(100% - 50px);
+
+  @media (min-width: 501px) {
+    max-height: 100%;
+  }
 `
 
 export const Title = styled.h1`
