@@ -18,7 +18,9 @@ export const Mobile = styled.div`
   overflow-y: hidden;
   border-radius: 8px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 768px) {
+    max-width: none;
+    max-height: none;
     border-radius: 0;
   }
 `
