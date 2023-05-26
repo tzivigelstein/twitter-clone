@@ -29,9 +29,13 @@ export const mapUserFromFirebaseAuth = data => {
 export const onAuthStateChanged = onChange => {
   return firebase.auth().onAuthStateChanged(async user => {
     if (user) {
+      const username = (
+        await firebase.firestore().collection('users').where('email', '==', user.email).get('username')
+      ).docs[0].data().username
+
       const token = await user.getIdToken()
       cookie.set('token', token, { expires: 14 })
-      const normalizedUser = user ? mapUserFromFirebaseAuth(user) : null
+      const normalizedUser = user ? mapUserFromFirebaseAuth({ ...user, username }) : null
       onChange(normalizedUser)
     }
   })
