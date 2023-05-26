@@ -26,6 +26,7 @@ export const Mobile = styled.div`
 export const Container = styled.main`
   margin: 0;
   overflow-y: auto;
+  height: 100%;
   max-height: calc(100% - 103px);
 `
 
