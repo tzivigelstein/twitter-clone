@@ -3,12 +3,11 @@ import Nav from 'components/Nav'
 import ProfileHeader from 'components/ProfileHeader'
 import Tweet from 'components/Tweet'
 import admin from 'firebase/admin'
-import { mapUserFromFirebaseToken } from 'firebase/client'
+import { mapUserFromFirebaseAuth } from 'firebase/client'
 import { getTweetData } from 'helpers'
-import nookies from 'nookies'
 import styles from '../styles/profile.module.css'
 
-export default function profile({ user, tweets }) {
+export default function Profile({ user, tweets }) {
   return (
     <div style={{ height: '100%' }}>
       <ProfileHeader user={user} />
@@ -21,7 +20,11 @@ export default function profile({ user, tweets }) {
             <span className={styles.userUsername}>@{user.username}</span>
           </div>
           <Container>
-            {tweets && tweets.map(tweet => <Tweet key={tweet.id} tweet={getTweetData(tweet, user)} />)}
+            {tweets ? (
+              tweets.map(tweet => <Tweet key={tweet.id} tweet={getTweetData(tweet, user)} />)
+            ) : (
+              <p>Could not load tweets</p>
+            )}
           </Container>
         </div>
       </div>
@@ -35,33 +38,46 @@ export default function profile({ user, tweets }) {
   )
 }
 
-// get user ssr
 export async function getServerSideProps(context) {
-  try {
-    const cookies = nookies.get(context)
-    const user = await admin.auth().verifyIdToken(cookies.token, true)
+  const mapTweetsToObject = async doc => {
+    const data = doc.data()
+    const id = doc.id
+    const userId = data.userId
 
-    // get all tweets from the user
+    const userDoc = await admin.firestore().collection('users').doc(userId).get()
+    const userData = userDoc.data()
+    const username = userData.username
+
+    return {
+      ...data,
+      id,
+      username,
+      createdAt: { seconds: data.createdAt.seconds, nanoseconds: data.createdAt.nanoseconds },
+    }
+  }
+
+  try {
+    const username = context.query.user
+    const user = (await admin.firestore().collection('users').where('username', '==', username).get()).docs[0].data()
+
     const tweets = await admin
       .firestore()
       .collection('tweets')
       .where('userId', '==', user.uid)
-      .orderBy('createdAt', 'desc')
       .get()
-      .then(snapshot =>
-        snapshot.docs.map(doc => {
-          const data = doc.data()
-          const id = doc.id
-          return {
-            ...data,
-            id,
-            createdAt: { seconds: data.createdAt.seconds, nanoseconds: data.createdAt.nanoseconds },
-          }
-        })
-      )
+      .then(async snapshot => {
+        const promises = snapshot.docs.map(mapTweetsToObject)
+        return await Promise.all(promises)
+      })
+      .catch(console.log)
 
     return {
-      props: { user: mapUserFromFirebaseToken(user), tweets: JSON.parse(JSON.stringify(tweets)) },
+      props: {
+        user: user && mapUserFromFirebaseAuth(user),
+        tweets: tweets
+          ? JSON.parse(JSON.stringify(tweets.sort((a, b) => b.createdAt.seconds - a.createdAt.seconds)))
+          : null,
+      },
     }
   } catch (err) {
     context.res.writeHead(302, { Location: '/login' })
