@@ -19,6 +19,10 @@ export const HeaderContainer = styled.div`
   position: sticky;
   top: 0;
   left: 0;
+
+  @media (min-width: 501px) {
+    display: none;
+  }
 `
 
 const Title = styled.span`
