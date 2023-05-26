@@ -15,27 +15,14 @@ const firebaseConfig = {
 
 export const db = firebase.firestore()
 
-const transformDisplayNameToUsername = displayName => displayName.toLowerCase().split(' ').join('')
-
 export const mapUserFromFirebaseAuth = data => {
-  const { displayName, email, photoURL, uid } = data
+  const { displayName, email, photoURL, uid, username } = data
   return {
     displayName,
     email,
     photoURL,
     uid,
-    username: transformDisplayNameToUsername(displayName),
-  }
-}
-
-export const mapUserFromFirebaseToken = data => {
-  const { name, picture, email, uid } = data
-  return {
-    displayName: name,
-    email,
-    photoURL: picture,
-    uid,
-    username: transformDisplayNameToUsername(name),
+    username,
   }
 }
 
