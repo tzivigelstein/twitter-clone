@@ -2,12 +2,18 @@
   width: 100%;
   aspect-ratio: 194 / 65;
   background-color: #000;
-  background-image: url('https://pbs.twimg.com/profile_banners/808381418053259264/1607444735/1080x360');
+  background-color: #e5e5f7;
+  opacity: 0.8;
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, #09f 10px),
+    repeating-linear-gradient(#093854, #14171a);
+
   background-position: center;
   background-size: cover;
 }
 
 .userPicture {
+  position: relative;
+  z-index: 1;
   --picture-width: 85.5px;
   width: var(--picture-width);
   aspect-ratio: 1;
